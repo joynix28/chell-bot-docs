@@ -1,0 +1,262 @@
+---
+title: '/config-verif'
+description: 'Système de vérification des membres'
+icon: 'shield-check'
+---
+
+## Description
+
+Met en place un système de vérification pour protéger votre serveur des bots et raiders. Les nouveaux membres doivent passer une étape de vérification avant d'accéder au serveur.
+
+## Utilisation
+
+```bash
+/config-verif
+```
+
+Un menu interactif s'affiche pour tout configurer.
+
+## Permissions requises
+
+<Warning>
+  **Vous :** Permission `Gérer le serveur`  
+  **Bot :** Permissions `Gérer les rôles`, `Gérer les salons`
+</Warning>
+
+## Méthodes de vérification
+
+<CardGroup cols={2}>
+  <Card title="Bouton simple" icon="hand-pointer">
+    Cliquer sur un bouton "Je ne suis pas un robot"
+  </Card>
+  
+  <Card title="Captcha" icon="keyboard">
+    Résoudre un captcha visuel
+  </Card>
+  
+  <Card title="Question" icon="question">
+    Répondre à une question
+  </Card>
+  
+  <Card title="Règlement" icon="book">
+    Accepter le règlement
+  </Card>
+</CardGroup>
+
+## Configuration pas à pas
+
+<Steps>
+  <Step title="Choisir la méthode">
+    Sélectionnez une méthode parmi les 4 disponibles
+  </Step>
+  
+  <Step title="Configurer le salon de vérification">
+    ```bash
+    /config-verif salon:#verification
+    ```
+    
+    <Info>
+    Le salon doit être **le seul visible** pour les non-vérifiés !
+    </Info>
+  </Step>
+  
+  <Step title="Définir les rôles">
+    - **Rôle non vérifié** : @Non-Vérifié (accès limité)
+    - **Rôle vérifié** : @Membre (accès complet)
+    
+    ```bash
+    /config-verif role-non-verifie:@Non-Vérifié
+    /config-verif role-verifie:@Membre
+    ```
+  </Step>
+  
+  <Step title="Personnaliser le message">
+    Créez un message d'explication avec embed
+  </Step>
+  
+  <Step title="Tester">
+    Testez avec un compte alternatif ou `/test-verif`
+  </Step>
+</Steps>
+
+## Méthode 1 : Bouton simple
+
+La plus basique, mais efficace contre les bots simples.
+
+```bash
+/config-verif methode:bouton
+```
+
+Le membre clique sur ✅ **"Je ne suis pas un robot"** pour être vérifié.
+
+## Méthode 2 : Captcha
+
+Génère une image avec du texte déformé à recopier.
+
+```bash
+/config-verif methode:captcha difficulte:moyen
+```
+
+**Difficultés disponibles :**
+- `facile` : 4 caractères, peu de bruit
+- `moyen` : 6 caractères, bruit modéré
+- `difficile` : 8 caractères, très déformé
+
+<Warning>
+Ne mettez pas `difficile` sauf en cas de raid ! Les vraies personnes peuvent échouer.
+</Warning>
+
+## Méthode 3 : Question
+
+Posez une question dont la réponse est dans le règlement.
+
+```bash
+/config-verif methode:question
+/config-verif question:"Quel est le préfixe du bot ?"
+/config-verif reponse:"/"
+```
+
+Oblige à lire le règlement ou un salon spécifique.
+
+## Méthode 4 : Acceptation règlement
+
+Affiche le règlement complet avec bouton d'acceptation.
+
+```bash
+/config-verif methode:reglement
+```
+
+Le membre doit faire défiler et accepter les conditions.
+
+## Permissions du salon de vérification
+
+Configuration recommandée pour `#verification` :
+
+### Rôle @everyone
+- ❌ Voir les salons : **Non**
+- ❌ Envoyer des messages : **Non**
+
+### Rôle @Non-Vérifié
+- ✅ Voir les salons : **Oui**
+- ✅ Voir l'historique : **Oui**
+- ❌ Envoyer des messages : **Non**
+- ❌ Réagir : **Non**
+
+### Rôle @Chell (bot)
+- ✅ Toutes permissions
+
+## Options avancées
+
+### Timeout automatique
+
+Kick automatique si pas vérifié en X temps :
+
+```bash
+/config-verif timeout:10m action:kick
+```
+
+### Logs de vérification
+
+```bash
+/config-verif logs salon:#logs-verif
+```
+
+Enregistre :
+- ✅ Vérifications réussies
+- ❌ Tentatives échouées
+- ⏱️ Timeouts
+- 🚨 Comportements suspects
+
+### Mode strict (double vérification)
+
+Combinez 2 méthodes :
+
+```bash
+/config-verif methode:captcha+question
+```
+
+Le membre doit réussir les deux pour être vérifié.
+
+### Whitelist
+
+Exempter certains membres de la vérification :
+
+```bash
+/config-verif whitelist ajouter @Partenaire
+```
+
+## Message de vérification personnalisé
+
+Exemple d'embed attractif :
+
+```yaml
+Titre: 🔒 Vérification requise
+
+Description:
+Bienvenue sur **NomServeur** !
+
+Pour accéder au serveur, tu dois d'abord te vérifier.
+Cela nous aide à protéger la communauté des bots et spammeurs.
+
+**Comment faire ?**
+1️⃣ Lis notre règlement ci-dessous
+2️⃣ Clique sur le bouton ✅ "Je ne suis pas un robot"
+3️⃣ Tu auras accès à tous les salons !
+
+⚠️ Tu as **10 minutes** pour te vérifier.
+
+Couleur: #5865F2
+Footer: 🔒 Vérification automatique par Chell
+```
+
+## Statistiques
+
+Consultez les stats de vérification :
+
+```bash
+/verif stats
+```
+
+Affiche :
+- Vérifications aujourd'hui
+- Taux de réussite
+- Temps moyen de vérification
+- Tentatives bloquées
+
+## Désactiver la vérification
+
+```bash
+/config-verif desactiver
+```
+
+<Warning>
+Tous les membres non vérifiés recevront automatiquement le rôle membre.
+</Warning>
+
+## Exemples de configuration
+
+### Serveur petit/moyen
+```bash
+/config-verif methode:bouton
+/config-verif timeout:15m action:kick
+```
+
+### Serveur communautaire grand
+```bash
+/config-verif methode:captcha difficulte:moyen
+/config-verif timeout:10m action:kick
+/config-verif logs:#logs-verif
+```
+
+### Serveur très strict
+```bash
+/config-verif methode:captcha+question
+/config-verif difficulte:difficile
+/config-verif timeout:5m action:ban
+```
+
+## Voir aussi
+
+- [/config-antibot](/commands/config/antibot) - Protection complémentaire
+- [/config-autoroles](/commands/config/autoroles) - Rôles automatiques
+- [/config-reglement](/commands/config/reglement) - Publier le règlement

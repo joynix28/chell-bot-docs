@@ -1,0 +1,164 @@
+---
+title: '/config-autoroles'
+description: 'Attribution automatique de rôles'
+icon: 'id-badge'
+---
+
+## Description
+
+Attribue automatiquement un ou plusieurs rôles aux membres qui rejoignent votre serveur.
+
+## Utilisation
+
+```bash
+/config-autoroles ajouter role: @Rôle
+```
+
+## Permissions requises
+
+<Warning>
+  **Vous :** Permission `Gérer les rôles`  
+  **Bot :** Permission `Gérer les rôles`
+  
+  ⚠️ Le bot ne peut attribuer que des rôles **inférieurs** à son rôle le plus élevé
+</Warning>
+
+## Ajouter un auto-rôle
+
+```bash
+/config-autoroles ajouter role:@Membre
+```
+
+Ce rôle sera attribué automatiquement à **tous les nouveaux membres**.
+
+## Ajouter plusieurs auto-rôles
+
+```bash
+/config-autoroles ajouter role:@Membre
+/config-autoroles ajouter role:@Notifié
+/config-autoroles ajouter role:@Bienvenue
+```
+
+Les 3 rôles seront attribués simultanément.
+
+## Retirer un auto-rôle
+
+```bash
+/config-autoroles retirer role:@Membre
+```
+
+## Lister les auto-rôles
+
+```bash
+/config-autoroles liste
+```
+
+Affiche tous les rôles actuellement configurés en auto-attribution.
+
+## Options avancées
+
+### Délai d'attribution
+
+Attendre X temps avant d'attribuer le rôle :
+
+```bash
+/config-autoroles ajouter role:@Membre delai:5m
+```
+
+Utile pour :
+- S'assurer que le membre n'est pas un bot
+- Laisser le temps de lire le règlement
+- Éviter les raids
+
+### Condition : Vérification
+
+Attribuer le rôle uniquement après vérification :
+
+```bash
+/config-autoroles ajouter role:@Membre apres-verif:Oui
+```
+
+Le membre doit d'abord passer la vérification configurée avec `/config-verif`.
+
+### Condition : Bots uniquement
+
+Pour attribuer un rôle seulement aux bots :
+
+```bash
+/config-autoroles ajouter role:@Bots bots-only:Oui
+```
+
+### Condition : Humains uniquement
+
+```bash
+/config-autoroles ajouter role:@Membre humans-only:Oui
+```
+
+## Rétroactif
+
+Attribuer les auto-rôles à tous les membres déjà présents :
+
+```bash
+/config-autoroles retroactif role:@Membre
+```
+
+<Warning>
+Cette action peut prendre plusieurs minutes sur les gros serveurs !
+</Warning>
+
+## Stack de rôles
+
+Vous pouvez créer un "stack" de rôles à attribution séquentielle :
+
+<Steps>
+  <Step title="Jour 1 : Rôle Nouveau">
+    ```bash
+    /config-autoroles ajouter role:@Nouveau delai:0s
+    ```
+  </Step>
+  
+  <Step title="Après 7 jours : Rôle Membre">
+    ```bash
+    /config-autoroles ajouter role:@Membre delai:7j retirer:@Nouveau
+    ```
+  </Step>
+  
+  <Step title="Après 30 jours : Rôle Actif">
+    ```bash
+    /config-autoroles ajouter role:@Actif delai:30j retirer:@Membre
+    ```
+  </Step>
+</Steps>
+
+## Exemples de configuration
+
+### Serveur communautaire basique
+```bash
+/config-autoroles ajouter role:@Membre
+```
+
+### Serveur avec vérification
+```bash
+/config-autoroles ajouter role:@Non-Vérifié
+/config-autoroles ajouter role:@Membre apres-verif:Oui
+```
+
+### Serveur avec onboarding
+```bash
+/config-autoroles ajouter role:@Nouveau
+/config-autoroles ajouter role:@Membre delai:24h retirer:@Nouveau
+```
+
+## Désactiver les auto-rôles
+
+```bash
+/config-autoroles desactiver
+```
+
+Ou retirer tous les rôles un par un.
+
+## Voir aussi
+
+- [/reaction-role](/commands/config/reaction-roles) - Rôles par réaction
+- [/roles-menu](/commands/config/roles-menu) - Menu de rôles
+- [/config-verif](/commands/config/verif) - Système de vérification

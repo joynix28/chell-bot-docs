@@ -1,0 +1,267 @@
+---
+title: '/giveaway'
+description: 'Créer un giveaway (concours)'
+icon: 'gift'
+---
+
+## Description
+
+Organisez des giveaways sur votre serveur ! Les membres participent en réagissant à un message et un gagnant est tiré au sort automatiquement.
+
+## Utilisation
+
+```bash
+/giveaway start prix: [description] duree: [temps] gagnants: [nombre]
+```
+
+## Permissions requises
+
+<Warning>
+  **Vous :** Permission `Gérer le serveur` ou rôle autorisé  
+  **Bot :** Permissions `Envoyer des messages`, `Ajouter des réactions`, `Intégrer des liens`
+</Warning>
+
+## Paramètres
+
+<ParamField path="prix" type="texte" required>
+  Description du prix à gagner
+</ParamField>
+
+<ParamField path="duree" type="durée" required>
+  Durée du giveaway (ex: `1h`, `24h`, `7j`)
+</ParamField>
+
+<ParamField path="gagnants" type="nombre" default="1">
+  Nombre de gagnants (1-20)
+</ParamField>
+
+<ParamField path="role_requis" type="rôle">
+  Rôle requis pour participer
+</ParamField>
+
+<ParamField path="hote" type="utilisateur">
+  Hôte du giveaway (par défaut : vous)
+</ParamField>
+
+<ParamField path="salon" type="salon">
+  Salon où lancer le giveaway (par défaut : salon actuel)
+</ParamField>
+
+## Exemples
+
+<CodeGroup>
+```bash Giveaway simple
+/giveaway start prix:"Nitro 1 mois" duree:24h gagnants:1
+```
+
+```bash Giveaway avec condition
+/giveaway start prix:"Rôle VIP" duree:48h gagnants:3 role_requis:@Membre
+```
+
+```bash Giveaway long
+/giveaway start prix:"Carte Steam 50€" duree:7j gagnants:1 hote:@Admin
+```
+</CodeGroup>
+
+## Fonctionnement
+
+<Steps>
+  <Step title="Lancement">
+    Un embed est envoyé avec les informations du giveaway
+  </Step>
+  
+  <Step title="Participation">
+    Les membres réagissent avec 🎉 pour participer
+  </Step>
+  
+  <Step title="Fin automatique">
+    À la fin du délai, le bot tire au sort les gagnants
+  </Step>
+  
+  <Step title="Annonce des gagnants">
+    Les gagnants sont mentionnés et reçoivent un MP
+  </Step>
+</Steps>
+
+## Embed du giveaway
+
+L'embed affiche :
+- 🎁 **Prix à gagner**
+- ⏰ **Temps restant** (mis à jour en temps réel)
+- 🎯 **Nombre de gagnants**
+- 👥 **Nombre de participants**
+- 👤 **Hôte du giveaway**
+- 🎫 **Condition d'accès** (si rôle requis)
+
+## Gestion des giveaways
+
+### Terminer en avance
+```bash
+/giveaway end id:[ID_message]
+```
+
+### Reroll (retirer au sort)
+```bash
+/giveaway reroll id:[ID_message]
+```
+Utile si le gagnant ne répond pas.
+
+### Annuler un giveaway
+```bash
+/giveaway cancel id:[ID_message]
+```
+
+### Éditer un giveaway
+```bash
+/giveaway edit id:[ID_message]
+```
+
+Vous pouvez modifier :
+- Prix
+- Durée
+- Nombre de gagnants
+
+## Liste des giveaways actifs
+
+```bash
+/giveaway list
+```
+
+Affiche tous les giveaways en cours sur le serveur.
+
+## Conditions de participation
+
+### Rôle requis
+```bash
+role_requis:@Membre+
+```
+
+Seuls les membres avec ce rôle peuvent participer.
+
+### Âge du compte
+```bash
+/giveaway start ... age_compte_min:30j
+```
+
+Compte Discord créé depuis au moins X jours.
+
+### Ancienneté sur le serveur
+```bash
+/giveaway start ... anciennete_min:7j
+```
+
+Membre du serveur depuis au moins X jours.
+
+### Messages minimum
+```bash
+/giveaway start ... messages_min:50
+```
+
+Au moins X messages envoyés sur le serveur.
+
+<Info>
+Les conditions sont cumulatives. Le bot vérifie automatiquement chaque participant.
+</Info>
+
+## Notification des gagnants
+
+Les gagnants reçoivent automatiquement :
+
+1. **Une mention** dans le salon du giveaway
+2. **Un MP** avec instructions pour réclamer le prix
+3. **Un rôle temporaire** `@Gagnant` (optionnel)
+
+## Configuration avancée
+
+### Rôle gagnant automatique
+```bash
+/config giveaway role-gagnant:@🏆Gagnant duree:24h
+```
+
+Le rôle est retiré automatiquement après 24h.
+
+### Logs des giveaways
+```bash
+/config giveaway logs:#logs-giveaways
+```
+
+Enregistre :
+- Créations de giveaways
+- Fins et gagnants
+- Rerolls
+- Annulations
+
+### Messages personnalisés
+```bash
+/config giveaway message-fin:"Félicitations ! Contacte {hote} pour récupérer ton prix !"
+```
+
+## Système anti-tr
+
+Le bot détecte automatiquement :
+- Les comptes créés récemment
+- Les membres qui partent/reviennent pour re-participer
+- Les alt accounts
+- Les bots
+
+## Exemples de prix populaires
+
+<AccordionGroup>
+  <Accordion title="Récompenses Discord">
+    - Nitro 1/3/6/12 mois
+    - Server Boosts
+    - Rôle VIP/Premium
+    - Accès salon privé
+  </Accordion>
+  
+  <Accordion title="Cartes cadeaux">
+    - Steam
+    - Amazon
+    - PlayStation Store
+    - Google Play
+    - PayPal
+  </Accordion>
+  
+  <Accordion title="Jeux vidéo">
+    - Clés Steam
+    - Comptes de jeux
+    - DLC
+    - Monnaies in-game
+  </Accordion>
+  
+  <Accordion title="Avantages serveur">
+    - Rôle couleur personnalisée
+    - Salon privé temporaire
+    - Mention dans annonces
+    - Badge spécial
+  </Accordion>
+</AccordionGroup>
+
+## Giveaways récurrents
+
+Créez des giveaways automatiques :
+
+```bash
+/giveaway auto prix:"Rôle VIP" frequence:hebdomadaire jour:vendredi heure:20h
+```
+
+Parfait pour fidéliser votre communauté !
+
+## Statistiques
+
+```bash
+/giveaway stats
+```
+
+Affiche :
+- Nombre total de giveaways organisés
+- Participants uniques
+- Taux de participation moyen
+- Prix les plus populaires
+- Gagnants du mois
+
+## Voir aussi
+
+- [/community-vote](/commands/community/vote) - Sondages
+- [/config-suggestions](/commands/config/suggestions) - Système de suggestions
+- [Guide complet giveaways](/guides/giveaways)

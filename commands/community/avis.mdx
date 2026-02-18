@@ -1,0 +1,167 @@
+---
+title: '/avis'
+description: 'Recueillir les avis de la communauté'
+icon: 'star'
+---
+
+## Description
+
+Permet de créer un système d'avis/notation pour recueillir les retours de votre communauté sur différents sujets.
+
+## Utilisation
+
+```bash
+/avis create sujet: [description] type: [notation]
+```
+
+## Permissions requises
+
+<Warning>
+  **Vous :** Permission `Gérer le serveur`  
+  **Bot :** Permissions `Envoyer des messages`, `Ajouter des réactions`
+</Warning>
+
+## Types de notation
+
+<CardGroup cols={2}>
+  <Card title="Étoiles" icon="star">
+    Notation de 1 à 5 étoiles ⭐
+  </Card>
+  
+  <Card title="Pouces" icon="thumbs-up">
+    👍 Positif / 👎 Négatif
+  </Card>
+  
+  <Card title="Note sur 10" icon="hashtag">
+    Notation de 0 à 10
+  </Card>
+  
+  <Card title="Satisfait/Pas satisfait" icon="face-smile">
+    😃 Satisfait / 😐 Neutre / 😡 Pas satisfait
+  </Card>
+</CardGroup>
+
+## Exemples
+
+<CodeGroup>
+```bash Avis simple
+/avis create sujet:"Qu'avez-vous pensé de l'événement d'hier ?" type:etoiles
+```
+
+```bash Avis avec formulaire
+/avis create sujet:"Feedback sur la mise à jour" type:detaille
+```
+</CodeGroup>
+
+## Avis avec formulaire détaillé
+
+Pour recueillir des avis complets :
+
+```bash
+/avis create-form titre:"Feedback serveur"
+```
+
+Un modal s'ouvre avec :
+- **Note globale** (1-5 étoiles)
+- **Points positifs** (texte)
+- **Points à améliorer** (texte)
+- **Suggestions** (texte optionnel)
+
+Les réponses sont envoyées en MP aux administrateurs.
+
+## Configuration
+
+Configurer le système d'avis :
+
+```bash
+/config avis salon:#avis anonyme:Oui
+```
+
+<ParamField path="salon" type="salon" required>
+  Salon dédié aux avis
+</ParamField>
+
+<ParamField path="anonyme" type="booléen" default="false">
+  Les avis sont-ils anonymes ?
+</ParamField>
+
+<ParamField path="moderation" type="booléen" default="true">
+  Modération avant publication
+</ParamField>
+
+## Modération des avis
+
+Si la modération est activée, les avis doivent être approuvés :
+
+```bash
+/avis moderate id:[ID] action:[approuver/rejeter]
+```
+
+Les avis en attente sont envoyés dans un salon privé staff.
+
+## Statistiques des avis
+
+```bash
+/avis stats
+```
+
+Affiche :
+- Nombre d'avis total
+- Note moyenne
+- Répartition des notes
+- Tendance sur 30 jours
+- Avis les plus récents
+
+## Notifications
+
+Recevez une notification pour chaque nouvel avis :
+
+```bash
+/config avis notif role:@Admin
+```
+
+## Exemples d'utilisation
+
+### Feedback après événement
+```bash
+/avis create sujet:"🎉 Événement Quiz - Votre avis" type:etoiles
+```
+
+### Avis sur une mise à jour
+```bash
+/avis create-form titre:"Mise à jour v2.0 - Feedback"
+```
+
+### Satisfaction générale
+```bash
+/avis create sujet:"📊 Êtes-vous satisfait du serveur ?" type:satisfaction
+```
+
+## Affichage public
+
+Créez un tableau récapitulatif des avis :
+
+```bash
+/avis dashboard
+```
+
+Génère un embed avec :
+- Note moyenne globale
+- Graphique de répartition
+- Nombre total d'avis
+- Derniers commentaires positifs
+
+Le tableau est mis à jour automatiquement.
+
+## Exporter les avis
+
+```bash
+/avis export format:csv periode:30j
+```
+
+Génère un fichier CSV/Excel avec tous les avis.
+
+## Voir aussi
+
+- [/config-suggestions](/commands/config/suggestions) - Système de suggestions
+- [/community-vote](/commands/community/vote) - Sondages
