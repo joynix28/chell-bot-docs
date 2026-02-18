@@ -6,113 +6,69 @@ icon: 'hammer'
 
 ## Description
 
-Permet de bannir définitivement un membre du serveur. Le membre ne pourra plus rejoindre le serveur à moins d'être débanni.
+Permet de bannir définitivement un membre de votre serveur Discord. Le membre ne pourra plus rejoindre le serveur tant qu'il ne sera pas débanni.
 
 ## Utilisation
 
-```
-/ban utilisateur:[membre] raison:[raison] supprimer_messages:[durée]
+```bash
+/ban membre: @utilisateur raison: [raison] preuve: [image/lien]
 ```
 
 ## Paramètres
 
-<ParamField path="utilisateur" type="utilisateur" required>
+<ParamField path="membre" type="utilisateur" required>
   Le membre à bannir
 </ParamField>
 
 <ParamField path="raison" type="texte" default="Aucune raison fournie">
-  La raison du bannissement (sera enregistrée dans les logs)
+  La raison du bannissement (affichée dans les logs)
 </ParamField>
 
-<ParamField path="supprimer_messages" type="choix" default="Ne pas supprimer">
-  - **Ne pas supprimer** : Garde l'historique des messages
-  - **Dernière heure** : Supprime les messages de la dernière heure
-  - **Dernier jour** : Supprime les messages des dernières 24h
-  - **Derniers 7 jours** : Supprime les messages de la dernière semaine
+<ParamField path="preuve" type="fichier/URL">
+  Une preuve (capture d'écran, lien) justifiant le bannissement
 </ParamField>
 
 ## Permissions requises
 
-<CardGroup cols={2}>
-  <Card title="Utilisateur" icon="user">
-    - Bannir des membres
-    - Ou avoir un rôle avec permission de modération
-  </Card>
-  <Card title="Bot" icon="robot">
-    - Bannir des membres
-    - Hiérarchie de rôles suffisante
-  </Card>
-</CardGroup>
-
 <Warning>
-  Le rôle de Chell doit être **au-dessus** du rôle du membre à bannir dans la hiérarchie.
+  **Vous :** Permission `Bannir des membres`  
+  **Bot :** Permission `Bannir des membres`
 </Warning>
+
+## Fonctionnalités
+
+- **Notification** : Le membre banni reçoit un message privé avec la raison
+- **Logs** : Action enregistrée dans les logs de modération (si configurés)
+- **Sanctions cumulatives** : Le bannissement est enregistré dans l'historique
+- **Preuve** : Possibilité d'attacher une preuve (image ou lien)
 
 ## Exemples
 
-### Bannissement simple
-```
-/ban utilisateur:@Membre raison:Spam
-```
-
-### Bannissement avec suppression de messages
-```
-/ban utilisateur:@Membre raison:Raid supprimer_messages:Derniers 7 jours
+<CodeGroup>
+```bash Bannissement simple
+/ban membre:@Spammeur raison:Spam répété
 ```
 
-### Bannissement temporaire
-Utilisez `/tempban` pour un bannissement temporaire :
+```bash Avec preuve
+/ban membre:@Harceleur raison:Harcèlement preuve:https://i.imgur.com/exemple.png
 ```
-/tempban utilisateur:@Membre durée:7j raison:Comportement inapproprié
-```
+</CodeGroup>
 
-## Logs
+## Notes importantes
 
-Le bannissement est automatiquement enregistré dans :
-- Le salon de logs (si configuré avec `/setup-logs`)
-- Le système de sanctions (consultable avec `/sanctions`)
-- Les logs Discord natifs
+<Note>
+- Les membres bannis ne peuvent pas rejoindre le serveur
+- L'action est définitive jusqu'à débannissement
+- Le membre peut faire appel via le serveur de support du bot
+- Historique consultable avec `/sanctions @membre`
+</Note>
 
-## Notification
+## Débannir un membre
 
-Le membre reçoit un message privé avant d'être banni (si ses MPs sont ouverts) contenant :
-- Le nom du serveur
-- La raison du bannissement
-- Le modérateur responsable
-- La possibilité de faire appel (si configuré)
+Utilisez la commande `/unban` ou allez dans Paramètres du serveur → Bannissements
 
-## Commandes associées
+## Voir aussi
 
-<CardGroup cols={2}>
-  <Card title="/unban" icon="unlock" href="/commands/moderation/unban">
-    Débannir un membre
-  </Card>
-  <Card title="/tempban" icon="clock" href="/commands/moderation/tempban">
-    Bannissement temporaire
-  </Card>
-  <Card title="/banlist" icon="list" href="/commands/moderation/banlist">
-    Liste des membres bannis
-  </Card>
-  <Card title="/sanctions" icon="scroll" href="/commands/moderation/sanctions">
-    Historique des sanctions
-  </Card>
-</CardGroup>
-
-## Questions fréquentes
-
-<AccordionGroup>
-  <Accordion title="Pourquoi le ban ne fonctionne pas ?">
-    Vérifiez que :
-    - Le rôle de Chell est au-dessus du membre à bannir
-    - Chell a la permission "Bannir des membres"
-    - Vous ne tentez pas de bannir le propriétaire du serveur
-  </Accordion>
-  
-  <Accordion title="Le membre ne reçoit pas de notification">
-    Le membre a probablement bloqué les messages privés. Le bannissement fonctionne quand même.
-  </Accordion>
-  
-  <Accordion title="Peut-on bannir plusieurs membres à la fois ?">
-    Utilisez `/ban-masse` pour bannir plusieurs membres simultanément.
-  </Accordion>
-</AccordionGroup>
+- [/kick](/commands/moderation/kick) - Expulser sans bannir
+- [/warn](/commands/moderation/warn) - Avertir un membre
+- [/jail](/commands/moderation/jail) - Isoler temporairement

@@ -1,71 +1,98 @@
 ---
 title: '/derank'
 description: 'Retirer tous les rôles d\'un membre'
-icon: 'user-minus'
+icon: 'arrow-down'
 ---
 
 ## Description
 
-Retire tous les rôles d'un membre, ne laissant que le rôle @everyone. Utile pour sanctionner un membre sans le bannir.
+Retire **tous les rôles** d'un membre (sauf @everyone). Utilisé pour sanctionner sans bannir/expulser, ou pour réinitialiser un membre.
 
 ## Utilisation
 
-```
-/derank utilisateur:[membre] raison:[raison]
+```bash
+/derank membre: @utilisateur raison: [raison] sauvegarder: [oui/non]
 ```
 
 ## Paramètres
 
-<ParamField path="utilisateur" type="utilisateur" required>
-  Le membre dont retirer les rôles
+<ParamField path="membre" type="utilisateur" required>
+  Le membre à derank
 </ParamField>
 
-<ParamField path="raison" type="texte" default="Aucune raison">
-  Raison du derank
+<ParamField path="raison" type="texte" default="Aucune raison fournie">
+  Raison du retrait des rôles
 </ParamField>
 
-## Exemple
+<ParamField path="sauvegarder" type="booléen" default="true">
+  Sauvegarder les rôles pour restauration ultérieure
+</ParamField>
 
-```
-/derank utilisateur:@Membre raison:Abus de permissions
+## Permissions requises
+
+<Warning>
+  **Vous :** Permission `Gérer les rôles`  
+  **Bot :** Permission `Gérer les rôles`
+  
+  ⚠️ Le bot ne peut retirer que les rôles **inférieurs** à son rôle le plus élevé
+</Warning>
+
+## Sauvegarde des rôles
+
+Par défaut, les rôles retirés sont **sauvegardés** :
+- Permet de restaurer facilement avec `/restore-roles`
+- Historique conservé pendant 30 jours
+- Visible avec `/sanctions @membre`
+
+## Restaurer les rôles
+
+```bash
+/restore-roles @membre
 ```
 
-## Rôles conservés
+Cela rendra **tous les rôles sauvegardés** lors du derank.
 
-Chell sauvegarde automatiquement les rôles retirés. Pour les restaurer :
+## Exemples
 
+<CodeGroup>
+```bash Derank avec sauvegarde
+/derank membre:@Problématique raison:Abus de permissions
 ```
-/restore-roles utilisateur:@Membre
+
+```bash Derank sans sauvegarde
+/derank membre:@AncienStaff raison:Démission sauvegarder:non
 ```
+</CodeGroup>
 
 ## Cas d'usage
 
-<CardGroup cols={2}>
-  <Card title="Abus de pouvoir" icon="gavel">
-    Un modérateur abuse de ses permissions
-  </Card>
-  <Card title="Compromission" icon="shield-exclamation">
-    Un compte membre a été piraté
-  </Card>
-  <Card title="Sanction temporaire" icon="clock">
-    Alternative à un kick/ban
-  </Card>
-  <Card title="Réévaluation" icon="user-check">
-    Remettre un membre au niveau basique
-  </Card>
-</CardGroup>
+<AccordionGroup>
+  <Accordion title="Sanction modération">
+    Membre abusant de ses permissions → Derank temporaire
+  </Accordion>
+  
+  <Accordion title="Réorganisation staff">
+    Démission ou restructuration → Derank permanent
+  </Accordion>
+  
+  <Accordion title="Réinitialisation compte">
+    Membre voulant recommencer → Derank puis réattribution manuelle
+  </Accordion>
+  
+  <Accordion title="Enquête interne">
+    Suspension pendant investigation → Derank puis restore après
+  </Accordion>
+</AccordionGroup>
 
-<Warning>
-  Le membre perd immédiatement toutes ses permissions. Utilisez avec précaution.
-</Warning>
+## Notification
 
-## Commandes associées
+Le membre reçoit un MP contenant :
+- 📋 Raison du derank
+- 🔄 Information sur la sauvegarde (si activée)
+- 📧 Contact pour faire appel
 
-<CardGroup cols={2}>
-  <Card title="/restore-roles" href="/commands/admin/restore-roles">
-    Restaurer les rôles sauvegardés
-  </Card>
-  <Card title="/addroles" href="/commands/admin/addroles">
-    Ajouter des rôles manuellement
-  </Card>
-</CardGroup>
+## Voir aussi
+
+- [/restore-roles](/commands/admin/restore-roles) - Restaurer les rôles
+- [/addroles](/commands/admin/addroles) - Ajouter des rôles en masse
+- [/removeroles](/commands/admin/removeroles) - Retirer des rôles spécifiques

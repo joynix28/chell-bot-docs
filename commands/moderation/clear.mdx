@@ -1,27 +1,27 @@
 ---
 title: '/clear'
 description: 'Supprimer des messages en masse'
-icon: 'trash'
+icon: 'eraser'
 ---
 
 ## Description
 
-Supprime plusieurs messages à la fois dans un salon. Très utile pour nettoyer rapidement un salon.
+Permet de supprimer plusieurs messages d'un salon en une seule commande. Utile pour nettoyer du spam ou des conversations inappropriées.
 
 ## Utilisation
 
-```
-/clear nombre:[quantité] utilisateur:[membre] contient:[texte]
+```bash
+/clear quantité: [nombre] membre: [@utilisateur] contient: [texte]
 ```
 
 ## Paramètres
 
-<ParamField path="nombre" type="nombre" required>
-  Nombre de messages à supprimer (entre 1 et 100)
+<ParamField path="quantité" type="nombre" required>
+  Nombre de messages à supprimer (1-100)
 </ParamField>
 
-<ParamField path="utilisateur" type="utilisateur">
-  Supprimer uniquement les messages d'un membre spécifique
+<ParamField path="membre" type="utilisateur">
+  Supprimer uniquement les messages de cet utilisateur
 </ParamField>
 
 <ParamField path="contient" type="texte">
@@ -32,44 +32,65 @@ Supprime plusieurs messages à la fois dans un salon. Très utile pour nettoyer 
   Supprimer uniquement les messages des bots
 </ParamField>
 
-<Warning>
-  Discord ne permet de supprimer que les messages de moins de 14 jours.
-</Warning>
-
-## Exemples
-
-### Supprimer les 50 derniers messages
-```
-/clear nombre:50
-```
-
-### Supprimer les messages d'un membre
-```
-/clear nombre:20 utilisateur:@Membre
-```
-
-### Supprimer les messages contenant un mot
-```
-/clear nombre:100 contient:spam
-```
-
-### Supprimer les messages des bots
-```
-/clear nombre:30 bots:true
-```
-
 ## Permissions requises
 
-- **Utilisateur** : Gérer les messages
-- **Bot** : Gérer les messages
+<Warning>
+  **Vous :** Permission `Gérer les messages`  
+  **Bot :** Permission `Gérer les messages`
+</Warning>
 
-## Confirmation
+## Limitation Discord
 
-Chell affiche un message de confirmation indiquant :
-- Le nombre de messages supprimés
-- Les filtres appliqués
-- Le modérateur responsable
+<Info>
+Discord ne permet de supprimer que les messages de **moins de 14 jours**. Les messages plus anciens doivent être supprimés manuellement.
+</Info>
 
-<Tip>
-  Utilisez `/clear` régulièrement pour maintenir vos salons propres.
-</Tip>
+## Exemples d'utilisation
+
+<CodeGroup>
+```bash Supprimer 50 messages
+/clear quantité:50
+```
+
+```bash Messages d'un membre spécifique
+/clear quantité:100 membre:@Spammeur
+```
+
+```bash Messages contenant un mot
+/clear quantité:50 contient:spam
+```
+
+```bash Messages des bots uniquement
+/clear quantité:30 bots:Oui
+```
+</CodeGroup>
+
+## Messages de confirmation
+
+Après suppression, le bot affiche un récapitulatif :
+- ✅ Nombre de messages supprimés
+- 👤 Utilisateur ciblé (si spécifié)
+- 📝 Filtre appliqué (si utilisé)
+
+Ce message s'auto-supprime après 5 secondes.
+
+## Logs automatiques
+
+Si les logs de modération sont configurés, chaque utilisation de `/clear` est enregistrée avec :
+- Modérateur responsable
+- Nombre de messages supprimés
+- Salon concerné
+- Filtres appliqués
+
+## Bonnes pratiques
+
+<Warning>
+- Ne supprimez pas de messages contenant des **preuves d'infraction**
+- Faites des captures d'écran si nécessaire **avant** de clear
+- Utilisez les filtres pour éviter de supprimer des messages importants
+</Warning>
+
+## Voir aussi
+
+- [/setup-logs](/commands/config/logs) - Configurer les logs
+- [/purge](/commands/moderation/purge) - Alternative avec plus d'options

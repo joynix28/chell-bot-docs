@@ -6,68 +6,95 @@ icon: 'triangle-exclamation'
 
 ## Description
 
-Donne un avertissement à un membre. Les warns peuvent entraîner des sanctions automatiques selon votre configuration.
+Émet un avertissement formel à un membre. Les avertissements sont cumulatifs et peuvent déclencher des sanctions automatiques.
 
 ## Utilisation
 
-```
-/warn utilisateur:[membre] raison:[raison]
+```bash
+/warn membre: @utilisateur raison: [raison] preuve: [image/lien]
 ```
 
 ## Paramètres
 
-<ParamField path="utilisateur" type="utilisateur" required>
+<ParamField path="membre" type="utilisateur" required>
   Le membre à avertir
 </ParamField>
 
 <ParamField path="raison" type="texte" required>
-  La raison de l'avertissement
+  Raison précise de l'avertissement
 </ParamField>
 
-## Configuration automatique
+<ParamField path="preuve" type="fichier/URL">
+  Preuve de l'infraction
+</ParamField>
 
-Configurez des sanctions automatiques avec `/config-warns` :
+## Permissions requises
 
-```
-/config-warns
-```
+<Warning>
+  **Vous :** Permission `Gérer les messages` ou rôle Modérateur  
+  **Bot :** Aucune permission spéciale requise
+</Warning>
 
-Options disponibles :
-- **3 warns** → Mute de 1 heure
-- **5 warns** → Kick du serveur
-- **7 warns** → Ban définitif
+## Système de sanctions automatiques
 
-## Gestion des warns
+Vous pouvez configurer des sanctions automatiques selon le nombre de warns :
 
-### Voir les warns d'un membre
-```
-/warns utilisateur:@Membre
-```
-
-### Retirer un warn
-```
-/unwarn utilisateur:@Membre warn_id:[ID]
+```bash
+/config-warns activer:Oui
 ```
 
-### Voir tous les warns du serveur
+### Exemple de configuration
+
+| Warns | Sanction |
+|-------|----------|
+| 3 | Mute 1h |
+| 5 | Jail 12h |
+| 7 | Kick |
+| 10 | Ban |
+
+<Info>
+Ces seuils sont **configurables** via `/config-warns seuils`
+</Info>
+
+## Gestion des avertissements
+
+### Consulter les warns d'un membre
+```bash
+/warns @membre
 ```
-/warnlist
+
+### Retirer un avertissement
+```bash
+/unwarn @membre id:[ID_warn]
 ```
 
-## Exemple
-
+### Réinitialiser tous les warns
+```bash
+/clearwarns @membre
 ```
-/warn utilisateur:@Membre raison:Langage inapproprié
+
+## Exemples
+
+<CodeGroup>
+```bash Warn simple
+/warn membre:@Contrevenant raison:Langage inapproprié
 ```
 
-## Notification
+```bash Avec preuve
+/warn membre:@Spammeur raison:Spam dans #général preuve:https://i.imgur.com/spam.png
+```
+</CodeGroup>
 
-Le membre reçoit un message privé contenant :
-- La raison du warn
-- Le modérateur responsable
-- Son nombre total de warns
-- Les sanctions à venir s'il accède plus de warns
+## Notification au membre
 
-<Tip>
-  Les warns sont un excellent moyen de sanctionner progressivement avant d'en arriver au ban.
-</Tip>
+Le membre averti reçoit un MP contenant :
+- 📋 La raison de l'avertissement
+- 🔢 Son nombre total de warns
+- ⚠️ Les sanctions possibles au prochain warn
+- 📎 La preuve (si fournie)
+
+## Voir aussi
+
+- [/warns](/commands/moderation/warns-list) - Liste des avertissements
+- [/config-warns](/commands/config/warns) - Configuration système
+- [/unwarn](/commands/moderation/unwarn) - Retirer un warn

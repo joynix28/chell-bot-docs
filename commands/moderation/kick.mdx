@@ -1,56 +1,55 @@
 ---
 title: '/kick'
 description: 'Expulser un membre du serveur'
-icon: 'boot'
+icon: 'shoe-prints'
 ---
 
 ## Description
 
-Expulse un membre du serveur. Contrairement au ban, le membre peut rejoindre à nouveau avec une invitation.
+Expulse un membre du serveur. Contrairement au ban, le membre pourra rejoindre de nouveau s'il possède un lien d'invitation.
 
 ## Utilisation
 
-```
-/kick utilisateur:[membre] raison:[raison]
+```bash
+/kick membre: @utilisateur raison: [raison] preuve: [image/lien]
 ```
 
 ## Paramètres
 
-<ParamField path="utilisateur" type="utilisateur" required>
+<ParamField path="membre" type="utilisateur" required>
   Le membre à expulser
 </ParamField>
 
 <ParamField path="raison" type="texte" default="Aucune raison fournie">
-  La raison de l'expulsion (sera enregistrée dans les logs)
+  La raison de l'expulsion
+</ParamField>
+
+<ParamField path="preuve" type="fichier/URL">
+  Une preuve justifiant l'expulsion
 </ParamField>
 
 ## Permissions requises
 
-- **Utilisateur** : Expulser des membres
-- **Bot** : Expulser des membres + hiérarchie suffisante
-
-## Exemple
-
-```
-/kick utilisateur:@Membre raison:Non-respect du règlement
-```
+<Warning>
+  **Vous :** Permission `Expulser des membres`  
+  **Bot :** Permission `Expulser des membres`
+</Warning>
 
 ## Différence avec /ban
 
-| Action | Kick | Ban |
-|--------|------|-----|
+| Caractéristique | Kick | Ban |
+|----------------|------|-----|
 | Peut rejoindre | ✅ Oui | ❌ Non |
-| Messages supprimés | ❌ Non | ✅ Option |
-| Réversible | — | ✅ Oui |
-| Sévérité | Moyenne | Élevée |
+| Sanctions | Modéré | Sévère |
+| Historique | Enregistré | Enregistré |
 
-## Commandes associées
+## Exemples
 
-<CardGroup cols={2}>
-  <Card title="/ban" href="/commands/moderation/ban">
-    Pour une sanction plus sévère
-  </Card>
-  <Card title="/warn" href="/commands/moderation/warn">
-    Pour un simple avertissement
-  </Card>
-</CardGroup>
+```bash
+/kick membre:@Perturbateur raison:Comportement inapproprié
+```
+
+## Voir aussi
+
+- [/ban](/commands/moderation/ban) - Bannissement définitif
+- [/warn](/commands/moderation/warn) - Avertissement
