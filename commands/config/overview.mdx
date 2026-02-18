@@ -1,190 +1,166 @@
 ---
-title: 'Vue d\'ensemble de la configuration'
-description: 'Personnalisez Chell Bot selon vos besoins'
+title: 'Vue d\'ensemble - Configuration'
+description: 'Guide complet de configuration de Chell Bot'
 icon: 'gear'
 ---
 
-## Accès à la configuration
+## Commande principale
 
-La commande principale pour accéder à tous les paramètres :
+Toutes les configurations passent par la commande :
 
-```
+```bash
 /config
 ```
 
-Cette commande ouvre un menu interactif avec toutes les options de configuration disponibles.
+Cette commande affiche un **menu interactif** avec toutes les options configurables.
 
-## Modules disponibles
-
-Chell Bot propose **20+ modules configurables** pour adapter le bot à vos besoins.
-
-### 👋 Accueil & Onboarding
+## Catégories de configuration
 
 <CardGroup cols={2}>
   <Card title="Accueil" icon="door-open" href="/commands/config/accueil">
-    Messages de bienvenue personnalisés
+    Messages de bienvenue et d'au revoir
   </Card>
-  <Card title="MP on Join" icon="envelope" href="/commands/config/mp-onjoin">
-    Messages privés automatiques
+  
+  <Card title="Modération" icon="shield" href="/commands/config/automod">
+    Automod, antibot, antighostping, antiping
   </Card>
-  <Card title="Autoroles" icon="user-tag" href="/commands/config/autoroles">
-    Rôles automatiques aux nouveaux
+  
+  <Card title="Rôles" icon="id-badge" href="/commands/config/autoroles">
+    Attribution automatique de rôles
   </Card>
-  <Card title="Vérification" icon="shield-check" href="/commands/config/verif">
-    Système de vérification captcha
+  
+  <Card title="Communauté" icon="users" href="/commands/config/suggestions">
+    Suggestions, confessions, votes
   </Card>
-</CardGroup>
-
-### 🛡️ Sécurité & Protection
-
-<CardGroup cols={2}>
-  <Card title="Antibot" icon="robot" href="/commands/config/antibot">
-    Protection contre les bots malveillants
+  
+  <Card title="Salons" icon="hashtag" href="/commands/config/tempchannel">
+    Salons temporaires, compteurs
   </Card>
-  <Card title="Antighost Ping" icon="ghost" href="/commands/config/antighostping">
-    Détection des mentions supprimées
-  </Card>
-  <Card title="Antiping" icon="at" href="/commands/config/antiping">
-    Limite les mentions everyone/here
-  </Card>
-  <Card title="Automod" icon="shield-halved" href="/commands/config/automod">
-    Modération automatique
+  
+  <Card title="Sécurité" icon="lock" href="/commands/config/verif">
+    Vérification des membres
   </Card>
 </CardGroup>
 
-### 📊 Statistiques & Compteurs
+## Permissions requises
 
-<CardGroup cols={2}>
-  <Card title="Compteur" icon="users" href="/commands/config/compteur">
-    Compteurs de membres en temps réel
-  </Card>
-  <Card title="Count Member" icon="hashtag" href="/commands/config/count-member">
-    Compteur avancé personnalisable
-  </Card>
-</CardGroup>
+<Warning>
+Pour configurer Chell Bot, vous devez avoir :
+- Permission `Administrateur`  
+**OU**  
+- Permission `Gérer le serveur`
 
-### 💬 Communauté & Engagement
+Le bot doit avoir les permissions adéquates selon les modules configurés.
+</Warning>
 
-<CardGroup cols={2}>
-  <Card title="Suggestions" icon="lightbulb" href="/commands/config/suggestions">
-    Système de suggestions avec votes
-  </Card>
-  <Card title="Confessions" icon="mask" href="/commands/config/confessions">
-    Confessions anonymes
-  </Card>
-  <Card title="Avis" icon="star" href="/commands/config/avis">
-    Système de collecte d'avis
-  </Card>
-  <Card title="Ping on Post" icon="bell" href="/commands/config/pingonpost">
-    Notifications automatiques
-  </Card>
-</CardGroup>
+## Menu de configuration
 
-### 🏠 Gestion serveur
+En utilisant `/config`, vous accédez à un menu avec boutons :
 
-<CardGroup cols={2}>
-  <Card title="Temp Channel" icon="headphones" href="/commands/config/tempchannel">
-    Salons vocaux temporaires
-  </Card>
-  <Card title="Planning" icon="calendar" href="/commands/config/planning">
-    Système de planning d'événements
-  </Card>
-  <Card title="Règlement" icon="scroll" href="/commands/config/reglement">
-    Générateur de règlement
-  </Card>
-  <Card title="Formulaire" icon="file-lines" href="/commands/config/formulaire">
-    Formulaires personnalisés
-  </Card>
-</CardGroup>
-
-### ⚖️ Modération
-
-<CardGroup cols={2}>
-  <Card title="Warns" icon="triangle-exclamation" href="/commands/config/warns">
-    Configuration des avertissements
-  </Card>
-  <Card title="Prison" icon="handcuffs" href="/commands/config/prison">
-    Système de prison
-  </Card>
-  <Card title="Logs" icon="file-lines" href="/commands/config/logs">
-    Configuration des logs
-  </Card>
-  <Card title="Autokick" icon="door-open" href="/commands/config/autokick">
-    Expulsion automatique
-  </Card>
-</CardGroup>
+1. **👋 Accueil** - Messages de bienvenue/départ
+2. **🛡️ Modération** - Systèmes anti-spam/raid
+3. **🎭 Rôles** - Auto-rôles et rôles-réaction
+4. **💬 Communauté** - Suggestions, sondages, confessions
+5. **🔊 Salons** - Compteurs, temp channels
+6. **🔒 Sécurité** - Vérification, captcha
+7. **📄 Logs** - Journalisation des événements
+8. **⚠️ Sanctions** - Système de warns
 
 ## Configuration rapide
 
-Pour une configuration optimale, suivez ces étapes :
+Pour une configuration rapide de votre serveur :
 
 <Steps>
-  <Step title="Configurez les logs">
+  <Step title="Activer les logs">
+    ```bash
+    /setup-logs salon:#logs
     ```
-    /setup-logs
-    ```
-    Essentiel pour suivre toutes les actions
   </Step>
   
-  <Step title="Activez les protections">
+  <Step title="Configurer l'accueil">
+    ```bash
+    /config-accueil
     ```
-    /config-antibot activer:Oui
+    Sélectionnez le salon et personnalisez le message
+  </Step>
+  
+  <Step title="Activer l'automod">
+    ```bash
     /config-automod activer:Oui
     ```
   </Step>
   
-  <Step title="Personnalisez l'accueil">
+  <Step title="Ajouter auto-rôles">
+    ```bash
+    /config-autoroles ajouter role:@Membre
     ```
-    /config-accueil
-    ```
-    Créez un message de bienvenue
-  </Step>
-  
-  <Step title="Configurez les warns">
-    ```
-    /config-warns
-    ```
-    Définissez les sanctions automatiques
   </Step>
 </Steps>
 
-## Sauvegarde de configuration
+## Commandes de configuration disponibles
 
-Sauvegardez toute votre configuration avec :
+### Accueil et départ
+- `/config-accueil` - Messages de bienvenue
+- `/config-mp-onjoin` - MP automatique aux nouveaux
 
-```
-/backup create
-```
+### Protection
+- `/config-antibot` - Protection anti-bots
+- `/config-antighostping` - Anti ghost ping
+- `/config-antiping` - Protection mentions @everyone/@here
+- `/config-automod` - Modération automatique
 
-Et restaurez-la sur un autre serveur avec :
+### Rôles
+- `/config-autoroles` - Rôles automatiques
+- `/reaction-role` - Rôles réactions
+- `/roles-menu` - Menu déroulant de rôles
 
-```
-/backup load
-```
+### Communauté
+- `/config-suggestions` - Système de suggestions
+- `/config-confessions` - Confessions anonymes
+- `/community-vote` - Sondages communautaires
+
+### Salons spéciaux
+- `/config-tempchannel` - Salons vocaux temporaires
+- `/config-compteur` - Compteurs de membres
+- `/config-count-member` - Statistiques membres
+
+### Sécurité et modération
+- `/config-verif` - Vérification membres
+- `/config-prison` - Système de jail
+- `/config-warns` - Configuration warns
+- `/setup-logs` - Logs modération
+
+### Autres
+- `/config-reglement` - Règlement du serveur
+- `/config-planning` - Planning événements
+- `/customise-bot` - Personnalisation bot
 
 ## Réinitialisation
 
-Pour réinitialiser un module spécifique :
+Pour réinitialiser une configuration :
 
-```
-/config reset module:[nom_du_module]
+```bash
+/config reset module:[nom_module]
 ```
 
 <Warning>
-  La réinitialisation supprime définitivement la configuration du module. Cette action est irréversible.
+Cette action est **irréversible** ! Pensez à sauvegarder vos paramètres avec `/backup`.
 </Warning>
 
-## Permissions
+## Sauvegarde configuration
 
-Pour configurer Chell, vous devez avoir :
-- La permission **Gérer le serveur**
-- Ou un rôle autorisé dans `/config permissions`
-
-## Besoin d'aide ?
-
-Chaque module dispose de sa propre documentation détaillée. Consultez les pages correspondantes dans le menu de gauche.
-
-Vous pouvez également utiliser :
+```bash
+/backup create nom:"Config_complete"
 ```
-/help config
+
+Restaurer une sauvegarde :
+
+```bash
+/backup restore id:[ID_backup]
 ```
+
+## Voir aussi
+
+- [Guide de setup complet](/guides/setup)
+- [Gestion des permissions](/guides/permissions)
+- [Sauvegarde et restauration](/commands/admin/backup)

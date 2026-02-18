@@ -1,0 +1,178 @@
+---
+title: '/config-antibot'
+description: 'Protection contre les raids de bots'
+icon: 'robot'
+---
+
+## Description
+
+Protège votre serveur contre les raids de bots en détectant et bannissant automatiquement les comptes suspects.
+
+## Utilisation
+
+```bash
+/config-antibot activer: [oui/non] sensibilité: [niveau]
+```
+
+## Paramètres
+
+<ParamField path="activer" type="booléen" required>
+  Activer ou désactiver la protection antibot
+</ParamField>
+
+<ParamField path="sensibilité" type="choix" default="moyen">
+  Niveau de protection :
+  - `faible` : Détection basique
+  - `moyen` : Équilibré (recommandé)
+  - `élevé` : Très strict
+</ParamField>
+
+## Permissions requises
+
+<Warning>
+  **Vous :** Permission `Gérer le serveur`  
+  **Bot :** Permissions `Bannir des membres`, `Expulser des membres`
+</Warning>
+
+## Critères de détection
+
+Un bot est détecté si :
+
+<AccordionGroup>
+  <Accordion title="Compte récent" icon="clock">
+    Compte créé il y a moins de 7 jours (paramétrable)
+  </Accordion>
+  
+  <Accordion title="Pas d'avatar" icon="image">
+    Utilise l'avatar par défaut de Discord
+  </Accordion>
+  
+  <Accordion title="Nom suspect" icon="text">
+    - Nom aléatoire (ex: `user12345`)
+    - Caractères spéciaux excessifs
+    - Contient des mots bannis
+  </Accordion>
+  
+  <Accordion title="Arrivée groupe" icon="users">
+    Plusieurs comptes rejoignent en même temps (raid)
+  </Accordion>
+  
+  <Accordion title="Flag Discord" icon="flag">
+    Badge "Bot" sans être vérifié
+  </Accordion>
+</AccordionGroup>
+
+## Niveaux de sensibilité
+
+### Faible 🟢
+- Détecte uniquement les raids évidents
+- 2+ critères requis
+- Peu de faux positifs
+
+### Moyen 🟡 (Recommandé)
+- Équilibre entre sécurité et faux positifs
+- 2 critères requis
+- Adaptation automatique
+
+### Élevé 🔴
+- Très strict
+- 1 seul critère suffit
+- Peut bloquer des vrais utilisateurs
+- Recommandé uniquement pendant un raid actif
+
+## Configuration avancée
+
+### Âge minimum du compte
+```bash
+/config-antibot age-minimum:7j
+```
+
+### Whitelist de serveurs
+```bash
+/config-antibot whitelist ajouter serveur:[ID]
+```
+Les membres venant de ces serveurs sont autorisés.
+
+### Action personnalisée
+```bash
+/config-antibot action:[kick/ban/verif]
+```
+- `kick` : Expulser les bots
+- `ban` : Bannir définitivement (par défaut)
+- `verif` : Envoyer en vérification manuelle
+
+### Logs de détection
+```bash
+/config-antibot logs salon:#logs-antibot
+```
+
+## Mode raid
+
+En cas de raid actif, activez le **Mode Lockdown** :
+
+```bash
+/antibot lockdown durée:30m
+```
+
+🔒 **Pendant le lockdown :**
+- Tous les nouveaux membres sont refusés
+- Invitation automatique désactivée
+- Niveau de vérification au maximum
+- Alertes envoyées au staff
+
+Le mode se désactive automatiquement après la durée spécifiée.
+
+## Statistiques
+
+Consultez les statistiques antibot :
+
+```bash
+/antibot stats
+```
+
+Affiche :
+- 🤖 Bots bloqués aujourd'hui
+- 📈 Tendance sur 7 jours
+- 🔍 Derniers blocages
+- ⚠️ Faux positifs signalés
+
+## Signaler un faux positif
+
+Si un vrai membre est bloqué par erreur :
+
+1. Utilisez `/antibot whitelist ajouter membre:@Membre`
+2. Ré-invitez le membre
+3. Signalez avec `/antibot report faux-positif id:[ID]`
+
+Le système apprendra de cette erreur.
+
+## Désactiver temporairement
+
+```bash
+/config-antibot pause durée:1h
+```
+
+Utile si vous organisez un événement ouvert.
+
+## Exemples de configuration
+
+<CodeGroup>
+```bash Serveur communautaire
+/config-antibot activer:oui sensibilité:moyen age-minimum:7j
+```
+
+```bash Serveur privé
+/config-antibot activer:oui sensibilité:élevé age-minimum:30j
+```
+
+```bash Pendant un raid
+/antibot lockdown durée:1h
+/config-antibot sensibilité:élevé
+```
+</CodeGroup>
+
+## Voir aussi
+
+- [/config-verif](/commands/config/verif) - Vérification manuelle
+- [/config-automod](/commands/config/automod) - Modération automatique
+- [/setup-logs](/commands/config/logs) - Logs de modération

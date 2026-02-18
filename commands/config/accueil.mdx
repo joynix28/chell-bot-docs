@@ -1,122 +1,41 @@
 ---
 title: '/config-accueil'
-description: 'Configurer les messages de bienvenue'
+description: 'Configurer les messages de bienvenue et d\'au revoir'
 icon: 'door-open'
 ---
 
 ## Description
 
-Créez des messages de bienvenue personnalisés avec images pour accueillir les nouveaux membres de votre serveur.
+Créez des messages personnalisés pour accueillir les nouveaux membres et dire au revoir à ceux qui partent.
 
 ## Utilisation
 
-```
+```bash
 /config-accueil
 ```
 
-Cette commande ouvre un menu interactif pour configurer tous les paramètres.
+Un menu interactif s'affiche pour configurer tous les paramètres.
 
-## Options disponibles
+## Permissions requises
 
-### Salon de bienvenue
+<Warning>
+  **Vous :** Permission `Gérer le serveur`  
+  **Bot :** Permissions `Envoyer des messages`, `Intégrer des liens`, `Attacher des fichiers` dans le salon choisi
+</Warning>
 
-Définissez le salon où seront envoyés les messages de bienvenue.
-
-```
-/config-accueil salon:#bienvenue
-```
-
-### Message personnalisé
-
-Personnalisez votre message avec des **variables dynamiques** :
-
-| Variable | Description | Exemple |
-|----------|-------------|----------|
-| `{user}` | Mention du membre | @Membre |
-| `{user.name}` | Nom du membre | Membre |
-| `{user.tag}` | Tag complet | Membre#1234 |
-| `{user.id}` | ID du membre | 123456789 |
-| `{server}` | Nom du serveur | Mon Serveur |
-| `{server.members}` | Nombre de membres | 1,250 |
-| `{server.count}` | Compteur d'arrivée | Tu es le 1250ème membre ! |
-
-### Exemple de message
-
-```
-Bienvenue {user} sur {server} ! 🎉
-
-Tu es notre {server.count} membre !
-
-N'oublie pas de lire le règlement dans #règles.
-```
-
-### Image de bienvenue
-
-Chell peut générer automatiquement une image de bienvenue avec :
-- Avatar du membre
-- Nom du membre
-- Compteur de membres
-- Image de fond personnalisable
-
-Activez cette fonctionnalité :
-
-```
-/config-accueil image:Activé
-```
-
-### Personnalisation de l'image
-
-<Tabs>
-  <Tab title="Couleur">
-    Choisissez la couleur de fond :
-    ```
-    /config-accueil couleur:#FF5733
-    ```
-  </Tab>
-  
-  <Tab title="Image de fond">
-    Utilisez une image personnalisée :
-    ```
-    /config-accueil background:[URL_image]
-    ```
-  </Tab>
-  
-  <Tab title="Police">
-    Sélectionnez le style de texte :
-    - Modern
-    - Classic  
-    - Elegant
-    ```
-    /config-accueil font:Modern
-    ```
-  </Tab>
-</Tabs>
-
-## Configuration complète
-
-Voici un exemple de configuration complète :
+## Configuration pas à pas
 
 <Steps>
-  <Step title="Ouvrir la configuration">
-    ```
-    /config-accueil
-    ```
+  <Step title="Activer le module">
+    Cliquez sur 👋 **Activer l'accueil**
   </Step>
   
-  <Step title="Définir le salon">
-    Sélectionnez `#bienvenue` dans le menu
-  </Step>
-  
-  <Step title="Activer les images">
-    Basculez l'option "Image" sur Activé
+  <Step title="Choisir le salon">
+    Sélectionnez le salon où envoyer les messages (ex: `#bienvenue`)
   </Step>
   
   <Step title="Personnaliser le message">
-    Cliquez sur "Éditer le message" et entrez votre texte
-  </Step>
-  
-  <Step title="Choisir le style">
-    Sélectionnez une couleur et une police
+    Utilisez les variables disponibles pour créer votre message
   </Step>
   
   <Step title="Tester">
@@ -124,93 +43,159 @@ Voici un exemple de configuration complète :
   </Step>
 </Steps>
 
-## Message d'adieu
+## Variables disponibles
 
-Vous pouvez aussi configurer un message quand un membre quitte :
+<ResponseField name="{user}" type="mention">
+  Mention du membre (@Pseudo)
+</ResponseField>
 
+<ResponseField name="{user.name}" type="texte">
+  Nom d'utilisateur (sans mention)
+</ResponseField>
+
+<ResponseField name="{user.id}" type="nombre">
+  ID Discord du membre
+</ResponseField>
+
+<ResponseField name="{user.tag}" type="texte">
+  Tag complet (Pseudo#0000)
+</ResponseField>
+
+<ResponseField name="{server}" type="texte">
+  Nom du serveur
+</ResponseField>
+
+<ResponseField name="{server.count}" type="nombre">
+  Nombre total de membres
+</ResponseField>
+
+<ResponseField name="{server.count.ordinal}" type="texte">
+  Nombre ordinal (1er, 2ème, 3ème...)
+</ResponseField>
+
+<ResponseField name="{date}" type="texte">
+  Date actuelle
+</ResponseField>
+
+<ResponseField name="{time}" type="texte">
+  Heure actuelle
+</ResponseField>
+
+## Exemples de messages
+
+### Message simple
+```txt
+Bienvenue {user} sur **{server}** !
+Tu es le {server.count.ordinal} membre ! 🎉
 ```
-/config-adieu
+
+### Message avec règles
+```txt
+👋 Bienvenue {user} !
+
+Nous sommes ravis de t'accueillir sur **{server}** !
+
+📜 Pense à lire notre <#ID_SALON_REGLES>
+🎭 Récupère tes rôles dans <#ID_SALON_ROLES>
+💬 Présente-toi dans <#ID_SALON_PRESENTATIONS>
+
+Bon amusement parmi nous ! 🎉
+Tu es notre {server.count.ordinal} membre !
 ```
 
-Utilise les mêmes variables que le message de bienvenue.
+### Message d'au revoir
+```txt
+👋 {user.name} vient de quitter **{server}**...
+Nous sommes maintenant {server.count} membres.
 
-## Rôle automatique
-
-Attribuez automatiquement un rôle aux nouveaux membres :
-
-```
-/config-accueil autorole:@Membre
+Bonne continuation ! ❤️
 ```
 
-<Tip>
-  Combinez avec `/config-verif` pour donner le rôle uniquement après vérification.
-</Tip>
+## Embed personnalisé
 
-## Exemples de configurations
+Pour un message encore plus esthétique, utilisez un embed :
 
-<AccordionGroup>
-  <Accordion title="Serveur Gaming">
-    **Message :**
-    ```
-    🎮 Bienvenue {user} chez [Nom du Serveur] !
-    
-    Tu es notre {server.count} joueur !
-    
-    📜 Lis les règles : #règles
-    🎮 Trouve ton équipe : #recrutement  
-    🎤 Rejoins-nous en vocal : #lobby
-    ```
-    **Image :** Activée avec thème gaming
-  </Accordion>
+<Steps>
+  <Step title="Activer le mode embed">
+    Dans le menu, cliquez sur **🎨 Mode Embed**
+  </Step>
   
-  <Accordion title="Communauté d'entraide">
-    **Message :**
-    ```
-    🤝 Bienvenue {user} !
-    
-    Nous sommes ravis de t'accueillir parmi nous. 
-    Tu es le {server.count} membre de notre communauté.
-    
-    • Présente-toi dans #présentations
-    • Pose tes questions dans #aide
-    • Partage dans #discussion
-    ```
-    **Image :** Couleurs douces, police Elegant
-  </Accordion>
-  
-  <Accordion title="Serveur privé">
-    **Message :**
-    ```
-    Bienvenue {user.name}
-    
-    Vérifie-toi dans #vérification pour accéder au serveur.
-    ```
-    **Image :** Désactivée
-    **Autorole :** @Non-vérifié
-  </Accordion>
-</AccordionGroup>
+  <Step title="Personnaliser">
+    - **Titre** : "Bienvenue !"
+    - **Description** : Votre message avec variables
+    - **Couleur** : Choisissez une couleur (hex)
+    - **Image** : URL d'une bannière
+    - **Thumbnail** : Avatar du membre (`{user.avatar}`)
+    - **Footer** : "Membre #{server.count}"
+  </Step>
+</Steps>
 
-## Désactivation
+## Image de bienvenue personnalisée
 
-Pour désactiver les messages de bienvenue :
+Générez automatiquement une image de bienvenue :
 
-```
-/config-accueil désactiver:Oui
+```bash
+/config-accueil image:Activer template:[numéro]
 ```
 
-## Commandes associées
+**Templates disponibles :**
+1. Template moderne bleu
+2. Template élégant noir
+3. Template coloré dégradé
+4. Template minimaliste
 
-<CardGroup cols={2}>
-  <Card title="/config-autoroles" href="/commands/config/autoroles">
-    Gérer les rôles automatiques
-  </Card>
-  <Card title="/config-verif" href="/commands/config/verif">
-    Ajouter une vérification
-  </Card>
-  <Card title="/config-mp-onjoin" href="/commands/config/mp-onjoin">
-    Message privé de bienvenue
-  </Card>
-  <Card title="/test-accueil" href="/commands/admin/test">
-    Tester le message
-  </Card>
-</CardGroup>
+L'image contient :
+- Avatar du membre
+- Pseudo
+- Nombre de membres
+- Date de création du compte
+
+## Message d'au revoir
+
+Pour configurer le message de départ :
+
+```bash
+/config-accueil type:depart
+```
+
+Les mêmes variables sont disponibles.
+
+## Options avancées
+
+### Supprimer automatiquement
+```bash
+/config-accueil auto-delete:5m
+```
+Le message de bienvenue sera supprimé après 5 minutes.
+
+### Attribution auto-rôle
+```bash
+/config-accueil role:@Membre
+```
+Attribue automatiquement un rôle à l'arrivée.
+
+### Salon multiple
+```bash
+/config-accueil salon-secondaire:#logs-join
+```
+Envoi aussi dans un salon de logs.
+
+## Test de configuration
+
+```bash
+/test-accueil
+```
+
+Cela simule votre arrivée sur le serveur.
+
+## Désactiver
+
+```bash
+/config-accueil desactiver
+```
+
+## Voir aussi
+
+- [/config-mp-onjoin](/commands/config/mp-onjoin) - MP personnalisé à l'arrivée
+- [/config-autoroles](/commands/config/autoroles) - Rôles automatiques
+- [/config-verif](/commands/config/verif) - Vérification avant accès

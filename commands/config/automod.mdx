@@ -1,0 +1,267 @@
+---
+title: '/config-automod'
+description: 'Modération automatique des messages'
+icon: 'shield-halved'
+---
+
+## Description
+
+Système de modération automatique qui détecte et sanctionne le spam, les insultes, les liens suspects et autres comportements indésirables.
+
+## Utilisation
+
+```bash
+/config-automod
+```
+
+Un menu interactif s'affiche avec toutes les options.
+
+## Permissions requises
+
+<Warning>
+  **Vous :** Permission `Gérer le serveur`  
+  **Bot :** Permissions `Gérer les messages`, `Exclure temporairement des membres`
+</Warning>
+
+## Modules disponibles
+
+<CardGroup cols={2}>
+  <Card title="Anti-Spam" icon="message-slash">
+    Détecte les messages répétitifs
+  </Card>
+  
+  <Card title="Anti-Insultes" icon="ban">
+    Filtre les mots interdits
+  </Card>
+  
+  <Card title="Anti-Liens" icon="link-slash">
+    Contrôle les URLs partagées
+  </Card>
+  
+  <Card title="Anti-Mentions" icon="at">
+    Limite les mentions excessives
+  </Card>
+  
+  <Card title="Anti-CAPS" icon="text-size">
+    Modère les MAJUSCULES
+  </Card>
+  
+  <Card title="Anti-Flood" icon="water">
+    Évite le spam de messages
+  </Card>
+</CardGroup>
+
+## Configuration Anti-Spam
+
+```bash
+/config-automod anti-spam activer:Oui
+```
+
+### Paramètres
+
+<ParamField path="messages_max" type="nombre" default="5">
+  Nombre maximum de messages en X secondes
+</ParamField>
+
+<ParamField path="intervalle" type="secondes" default="5">
+  Intervalle de temps pour compter les messages
+</ParamField>
+
+<ParamField path="sanction" type="choix">
+  Action à effectuer :
+  - `supprimer` : Supprimer les messages uniquement
+  - `warn` : Avertir le membre
+  - `mute` : Timeout de 5 minutes
+  - `kick` : Expulser
+</ParamField>
+
+### Exemple
+```bash
+Si un membre envoie **plus de 5 messages** en **5 secondes** → **Mute 5 min**
+```
+
+## Configuration Anti-Insultes
+
+```bash
+/config-automod anti-insultes activer:Oui
+```
+
+### Liste de mots bannis
+
+Ajoutez des mots à la liste noire :
+
+```bash
+/automod mots-bannis ajouter mot:[mot] severity:[niveau]
+```
+
+**Niveaux de sévérité :**
+- `faible` : Supprimer le message
+- `moyen` : Supprimer + warn
+- `élevé` : Supprimer + mute 30min
+- `critique` : Supprimer + kick
+
+### Liste pré-configurée
+
+Chell dispose d'une liste par défaut de :
+- 🇫🇷 500+ insultes françaises
+- 🇬🇧 300+ insultes anglaises
+- 🔞 Contenus explicites
+
+<Info>
+Vous pouvez activer/désactiver les listes par langue avec le menu.
+</Info>
+
+## Configuration Anti-Liens
+
+```bash
+/config-automod anti-liens mode:[tous/suspects]
+```
+
+### Modes disponibles
+
+<Tabs>
+  <Tab title="Tous les liens">
+    Bloque **tous les liens** sauf whitelist
+    
+    ```bash
+    /automod whitelist-liens ajouter domaine:discord.com
+    ```
+  </Tab>
+  
+  <Tab title="Liens suspects">
+    Bloque uniquement les liens dangereux :
+    - Sites de phishing
+    - Raccourcisseurs d'URL
+    - Domaines récents (<30j)
+    - IP directes
+  </Tab>
+</Tabs>
+
+### Exceptions
+
+Autoriser les liens pour certains rôles :
+
+```bash
+/automod exceptions ajouter role:@Membre+ module:liens
+```
+
+## Configuration Anti-Mentions
+
+Limite les mentions excessives (@everyone, @here, mentions utilisateurs).
+
+```bash
+/config-automod anti-mentions max:5
+```
+
+Sanction si **plus de 5 mentions** dans un message.
+
+## Configuration Anti-CAPS
+
+Modère les messages écrits ENTIÈREMENT EN MAJUSCULES.
+
+```bash
+/config-automod anti-caps pourcentage:70
+```
+
+Sanction si **plus de 70%** du message est en CAPS.
+
+## Configuration Anti-Flood
+
+Évite l'envoi massif de messages identiques.
+
+```bash
+/config-automod anti-flood messages_identiques:3
+```
+
+Sanction si **3 messages identiques** en 30 secondes.
+
+## Salons ignorés
+
+Exclure certains salons de l'automod :
+
+```bash
+/automod ignorer salon:#spam
+```
+
+Utile pour les salons :
+- `#spam`
+- `#bot-commands`
+- `#test`
+
+## Rôles immunité
+
+Exempter certains rôles de l'automod :
+
+```bash
+/automod immunite ajouter role:@Staff
+```
+
+## Logs automod
+
+Rediriger les actions d'automod vers un salon :
+
+```bash
+/config-automod logs salon:#logs-automod
+```
+
+Chaque action enregistrée contient :
+- 👤 Membre concerné
+- 📝 Contenu du message (si supprimé)
+- ⚠️ Module déclenché
+- 🔨 Sanction appliquée
+- 🕗 Horodatage
+
+## Tableau de bord
+
+Consultez les statistiques automod :
+
+```bash
+/automod dashboard
+```
+
+Affiche :
+- Nombre d'infractions par module (24h)
+- Membres les plus sanctionnés
+- Salons les plus actifs
+- Tendances hebdomadaires
+
+## Configuration recommandée
+
+### Serveur communautaire
+```bash
+/config-automod anti-spam:Oui (5 msg/5s)
+/config-automod anti-insultes:Oui (liste FR+EN)
+/config-automod anti-liens:suspects
+/config-automod anti-mentions:Oui (max 5)
+/config-automod anti-caps:Oui (70%)
+```
+
+### Serveur strict
+```bash
+/config-automod anti-spam:Oui (3 msg/5s)
+/config-automod anti-insultes:Oui (toutes listes)
+/config-automod anti-liens:tous
+/config-automod anti-mentions:Oui (max 3)
+/config-automod anti-caps:Oui (50%)
+/config-automod anti-flood:Oui (2 identiques)
+```
+
+### Serveur détendu
+```bash
+/config-automod anti-spam:Non
+/config-automod anti-insultes:Oui (insultes graves uniquement)
+/config-automod anti-liens:suspects
+/config-automod anti-mentions:Oui (max 10)
+```
+
+## Désactiver l'automod
+
+```bash
+/config-automod desactiver
+```
+
+## Voir aussi
+
+- [/config-antibot](/commands/config/antibot) - Protection anti-bots
+- [/config-warns](/commands/config/warns) - Système d'avertissements
+- [/setup-logs](/commands/config/logs) - Logs de modération
