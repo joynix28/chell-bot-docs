@@ -1,0 +1,145 @@
+---
+title: 'Démarrage Rapide'
+description: 'Configurez Chell Bot en quelques minutes'
+---
+
+## Invitation du bot
+
+1. Cliquez sur le bouton **Inviter Chell** en haut de cette page
+2. Sélectionnez le serveur où vous souhaitez ajouter Chell
+3. Accordez les permissions demandées (Administrateur recommandé)
+4. Validez l'invitation
+
+<Warning>
+  Assurez-vous d'avoir les permissions **Gérer le serveur** pour pouvoir inviter des bots.
+</Warning>
+
+## Première configuration
+
+### 1. Vérifier le statut du bot
+
+Une fois Chell ajouté, utilisez :
+
+```
+/botinfo
+```
+
+Cette commande affiche les informations du bot et confirme qu'il fonctionne correctement.
+
+### 2. Configurer les logs
+
+Pour suivre toutes les actions sur votre serveur :
+
+```
+/setup-logs
+```
+
+Sélectionnez un salon où Chell enverra les logs (créations/suppressions de salons, membres, rôles, etc.).
+
+### 3. Configurer la modération
+
+Activez l'antiraid et les protections de base :
+
+```
+/config-antibot activer:Oui
+```
+
+Configurez le système de warns :
+
+```
+/config-warns
+```
+
+### 4. Personnaliser l'accueil
+
+Créez un message de bienvenue personnalisé :
+
+```
+/config-accueil
+```
+
+Vous pouvez :
+- Choisir un salon
+- Personnaliser le message avec des variables
+- Ajouter une image de fond
+- Configurer des rôles automatiques
+
+## Commandes essentielles
+
+<CardGroup cols={2}>
+  <Card title="/help" icon="circle-question">
+    Affiche toutes les commandes disponibles
+  </Card>
+  <Card title="/config" icon="gear">
+    Accède au panneau de configuration principal
+  </Card>
+  <Card title="/ban" icon="hammer">
+    Bannir un membre du serveur
+  </Card>
+  <Card title="/ticket" icon="ticket">
+    Crée un système de tickets
+  </Card>
+</CardGroup>
+
+## Configuration avancée
+
+Pour une configuration détaillée de chaque module, consultez nos guides :
+
+<CardGroup cols={2}>
+  <Card
+    title="Guide de configuration"
+    icon="book"
+    href="/guides/setup"
+  >
+    Configuration complète pas à pas
+  </Card>
+  <Card
+    title="Gestion des permissions"
+    icon="key"
+    href="/guides/permissions"
+  >
+    Configurer les permissions par rôle
+  </Card>
+  <Card
+    title="Système de tickets"
+    icon="ticket"
+    href="/guides/tickets"
+  >
+    Mettre en place un système de support
+  </Card>
+  <Card
+    title="Rôles à réaction"
+    icon="hand-pointer"
+    href="/guides/reaction-roles"
+  >
+    Permettre aux membres de choisir leurs rôles
+  </Card>
+</CardGroup>
+
+## Problèmes courants
+
+<AccordionGroup>
+  <Accordion title="Le bot ne répond pas à mes commandes">
+    - Vérifiez que le bot est en ligne (voyant vert)
+    - Assurez-vous d'utiliser `/` avant la commande (commandes slash)
+    - Vérifiez les permissions du bot dans le salon
+  </Accordion>
+  
+  <Accordion title="Les commandes de modération ne fonctionnent pas">
+    - Vérifiez que le rôle de Chell est au-dessus des rôles à modérer
+    - Accordez la permission "Administrateur" pour un fonctionnement optimal
+  </Accordion>
+  
+  <Accordion title="Les logs ne s'affichent pas">
+    - Utilisez `/setup-logs` pour configurer le salon de logs
+    - Vérifiez que Chell peut envoyer des messages dans ce salon
+  </Accordion>
+</AccordionGroup>
+
+## Besoin d'aide ?
+
+Si vous rencontrez des difficultés, n'hésitez pas à :
+
+- Consulter nos [guides détaillés](/guides/setup)
+- Rejoindre notre [serveur Discord](https://discord.gg/chell)
+- Contacter le support via `/ticket`
