@@ -1,0 +1,81 @@
+---
+title: '/mute'
+description: 'Rendre un membre muet'
+icon: 'volume-xmark'
+---
+
+## Description
+
+Empêche un membre d'écrire ou de parler dans les salons. Utilise le système de timeout de Discord.
+
+## Utilisation
+
+```
+/mute utilisateur:[membre] durée:[temps] raison:[raison]
+```
+
+## Paramètres
+
+<ParamField path="utilisateur" type="utilisateur" required>
+  Le membre à rendre muet
+</ParamField>
+
+<ParamField path="durée" type="texte" required>
+  Durée du mute (ex: 5m, 1h, 1j)
+  
+  Durées acceptées :
+  - `m` : minutes (max 60)
+  - `h` : heures (max 24) 
+  - `j` : jours (max 28)
+</ParamField>
+
+<ParamField path="raison" type="texte" default="Aucune raison">
+  Raison du mute
+</ParamField>
+
+<Note>
+  Discord limite les mutes à 28 jours maximum. Pour une durée plus longue, utilisez `/jail`.
+</Note>
+
+## Exemples
+
+```
+/mute utilisateur:@Membre durée:10m raison:Flood
+```
+
+```
+/mute utilisateur:@Membre durée:1h raison:Insultes
+```
+
+## Unmute
+
+Pour retirer le mute avant la fin :
+
+```
+/unmute utilisateur:@Membre
+```
+
+## Restrictions
+
+Un membre mute ne peut pas :
+- Écrire de messages
+- Créer de threads
+- Réagir aux messages
+- Parler dans les salons vocaux
+- Partager son écran
+
+Mais il peut :
+- Voir les salons
+- Lire les messages
+- Écouter dans les salons vocaux
+
+## Commandes associées
+
+<CardGroup cols={2}>
+  <Card title="/unmute" href="/commands/moderation/unmute">
+    Retirer le mute
+  </Card>
+  <Card title="/jail" href="/commands/moderation/jail">
+    Pour une sanction plus longue
+  </Card>
+</CardGroup>

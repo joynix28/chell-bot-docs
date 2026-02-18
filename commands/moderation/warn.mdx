@@ -1,0 +1,73 @@
+---
+title: '/warn'
+description: 'Avertir un membre'
+icon: 'triangle-exclamation'
+---
+
+## Description
+
+Donne un avertissement à un membre. Les warns peuvent entraîner des sanctions automatiques selon votre configuration.
+
+## Utilisation
+
+```
+/warn utilisateur:[membre] raison:[raison]
+```
+
+## Paramètres
+
+<ParamField path="utilisateur" type="utilisateur" required>
+  Le membre à avertir
+</ParamField>
+
+<ParamField path="raison" type="texte" required>
+  La raison de l'avertissement
+</ParamField>
+
+## Configuration automatique
+
+Configurez des sanctions automatiques avec `/config-warns` :
+
+```
+/config-warns
+```
+
+Options disponibles :
+- **3 warns** → Mute de 1 heure
+- **5 warns** → Kick du serveur
+- **7 warns** → Ban définitif
+
+## Gestion des warns
+
+### Voir les warns d'un membre
+```
+/warns utilisateur:@Membre
+```
+
+### Retirer un warn
+```
+/unwarn utilisateur:@Membre warn_id:[ID]
+```
+
+### Voir tous les warns du serveur
+```
+/warnlist
+```
+
+## Exemple
+
+```
+/warn utilisateur:@Membre raison:Langage inapproprié
+```
+
+## Notification
+
+Le membre reçoit un message privé contenant :
+- La raison du warn
+- Le modérateur responsable
+- Son nombre total de warns
+- Les sanctions à venir s'il accède plus de warns
+
+<Tip>
+  Les warns sont un excellent moyen de sanctionner progressivement avant d'en arriver au ban.
+</Tip>

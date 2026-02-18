@@ -1,0 +1,71 @@
+---
+title: '/derank'
+description: 'Retirer tous les rôles d\'un membre'
+icon: 'user-minus'
+---
+
+## Description
+
+Retire tous les rôles d'un membre, ne laissant que le rôle @everyone. Utile pour sanctionner un membre sans le bannir.
+
+## Utilisation
+
+```
+/derank utilisateur:[membre] raison:[raison]
+```
+
+## Paramètres
+
+<ParamField path="utilisateur" type="utilisateur" required>
+  Le membre dont retirer les rôles
+</ParamField>
+
+<ParamField path="raison" type="texte" default="Aucune raison">
+  Raison du derank
+</ParamField>
+
+## Exemple
+
+```
+/derank utilisateur:@Membre raison:Abus de permissions
+```
+
+## Rôles conservés
+
+Chell sauvegarde automatiquement les rôles retirés. Pour les restaurer :
+
+```
+/restore-roles utilisateur:@Membre
+```
+
+## Cas d'usage
+
+<CardGroup cols={2}>
+  <Card title="Abus de pouvoir" icon="gavel">
+    Un modérateur abuse de ses permissions
+  </Card>
+  <Card title="Compromission" icon="shield-exclamation">
+    Un compte membre a été piraté
+  </Card>
+  <Card title="Sanction temporaire" icon="clock">
+    Alternative à un kick/ban
+  </Card>
+  <Card title="Réévaluation" icon="user-check">
+    Remettre un membre au niveau basique
+  </Card>
+</CardGroup>
+
+<Warning>
+  Le membre perd immédiatement toutes ses permissions. Utilisez avec précaution.
+</Warning>
+
+## Commandes associées
+
+<CardGroup cols={2}>
+  <Card title="/restore-roles" href="/commands/admin/restore-roles">
+    Restaurer les rôles sauvegardés
+  </Card>
+  <Card title="/addroles" href="/commands/admin/addroles">
+    Ajouter des rôles manuellement
+  </Card>
+</CardGroup>

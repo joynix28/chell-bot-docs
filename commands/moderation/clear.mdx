@@ -1,0 +1,75 @@
+---
+title: '/clear'
+description: 'Supprimer des messages en masse'
+icon: 'trash'
+---
+
+## Description
+
+Supprime plusieurs messages à la fois dans un salon. Très utile pour nettoyer rapidement un salon.
+
+## Utilisation
+
+```
+/clear nombre:[quantité] utilisateur:[membre] contient:[texte]
+```
+
+## Paramètres
+
+<ParamField path="nombre" type="nombre" required>
+  Nombre de messages à supprimer (entre 1 et 100)
+</ParamField>
+
+<ParamField path="utilisateur" type="utilisateur">
+  Supprimer uniquement les messages d'un membre spécifique
+</ParamField>
+
+<ParamField path="contient" type="texte">
+  Supprimer uniquement les messages contenant ce texte
+</ParamField>
+
+<ParamField path="bots" type="booléen">
+  Supprimer uniquement les messages des bots
+</ParamField>
+
+<Warning>
+  Discord ne permet de supprimer que les messages de moins de 14 jours.
+</Warning>
+
+## Exemples
+
+### Supprimer les 50 derniers messages
+```
+/clear nombre:50
+```
+
+### Supprimer les messages d'un membre
+```
+/clear nombre:20 utilisateur:@Membre
+```
+
+### Supprimer les messages contenant un mot
+```
+/clear nombre:100 contient:spam
+```
+
+### Supprimer les messages des bots
+```
+/clear nombre:30 bots:true
+```
+
+## Permissions requises
+
+- **Utilisateur** : Gérer les messages
+- **Bot** : Gérer les messages
+
+## Confirmation
+
+Chell affiche un message de confirmation indiquant :
+- Le nombre de messages supprimés
+- Les filtres appliqués
+- Le modérateur responsable
+
+<Tip>
+  Utilisez `/clear` régulièrement pour maintenir vos salons propres.
+</Tip>

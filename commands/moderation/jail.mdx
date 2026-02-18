@@ -1,0 +1,92 @@
+---
+title: '/jail'
+description: 'Mettre un membre en prison'
+icon: 'handcuffs'
+---
+
+## Description
+
+Place un membre en "prison" en lui retirant tous ses rôles et en lui donnant un rôle spécifique qui limite ses accès.
+
+## Configuration préalable
+
+Avant d'utiliser cette commande, configurez le système de prison :
+
+```
+/config-prison salon:[#prison] role:[@Prison]
+```
+
+<Steps>
+  <Step title="Créez un rôle Prison">
+    Créez un rôle "Prison" avec aucune permission
+  </Step>
+  <Step title="Créez un salon prison">
+    Créez un salon privé visible uniquement par le rôle Prison
+  </Step>
+  <Step title="Configurez avec Chell">
+    Utilisez `/config-prison` pour lier le rôle et le salon
+  </Step>
+</Steps>
+
+## Utilisation
+
+```
+/jail utilisateur:[membre] durée:[temps] raison:[raison]
+```
+
+## Paramètres
+
+<ParamField path="utilisateur" type="utilisateur" required>
+  Le membre à mettre en prison
+</ParamField>
+
+<ParamField path="durée" type="texte">
+  Durée de la prison (ex: 1h, 30m, 1j). Laissez vide pour permanent
+</ParamField>
+
+<ParamField path="raison" type="texte" default="Aucune raison">
+  Raison de la mise en prison
+</ParamField>
+
+## Exemples
+
+### Prison temporaire
+```
+/jail utilisateur:@Membre durée:2h raison:Spam répété
+```
+
+### Prison permanente
+```
+/jail utilisateur:@Membre raison:Comportement toxique
+```
+
+## Libération
+
+Pour libérer un membre de prison :
+
+```
+/unjail utilisateur:@Membre
+```
+
+Les rôles d'origine sont automatiquement restaurés.
+
+## Avantages
+
+<CardGroup cols={2}>
+  <Card title="Réversible" icon="rotate-left">
+    Le membre conserve sa présence sur le serveur
+  </Card>
+  <Card title="Éducatif" icon="graduation-cap">
+    Permet au membre de réfléchir à son comportement
+  </Card>
+  <Card title="Flexible" icon="clock">
+    Temporaire ou permanent selon le besoin
+  </Card>
+  <Card title="Conservation" icon="database">
+    Les rôles sont sauvegardés et restaurés
+  </Card>
+</CardGroup>
+
+<Warning>
+  Assurez-vous que le rôle Prison est bien configuré avant d'utiliser cette commande.
+</Warning>

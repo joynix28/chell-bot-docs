@@ -1,0 +1,118 @@
+---
+title: '/ban'
+description: 'Bannir un membre du serveur'
+icon: 'hammer'
+---
+
+## Description
+
+Permet de bannir définitivement un membre du serveur. Le membre ne pourra plus rejoindre le serveur à moins d'être débanni.
+
+## Utilisation
+
+```
+/ban utilisateur:[membre] raison:[raison] supprimer_messages:[durée]
+```
+
+## Paramètres
+
+<ParamField path="utilisateur" type="utilisateur" required>
+  Le membre à bannir
+</ParamField>
+
+<ParamField path="raison" type="texte" default="Aucune raison fournie">
+  La raison du bannissement (sera enregistrée dans les logs)
+</ParamField>
+
+<ParamField path="supprimer_messages" type="choix" default="Ne pas supprimer">
+  - **Ne pas supprimer** : Garde l'historique des messages
+  - **Dernière heure** : Supprime les messages de la dernière heure
+  - **Dernier jour** : Supprime les messages des dernières 24h
+  - **Derniers 7 jours** : Supprime les messages de la dernière semaine
+</ParamField>
+
+## Permissions requises
+
+<CardGroup cols={2}>
+  <Card title="Utilisateur" icon="user">
+    - Bannir des membres
+    - Ou avoir un rôle avec permission de modération
+  </Card>
+  <Card title="Bot" icon="robot">
+    - Bannir des membres
+    - Hiérarchie de rôles suffisante
+  </Card>
+</CardGroup>
+
+<Warning>
+  Le rôle de Chell doit être **au-dessus** du rôle du membre à bannir dans la hiérarchie.
+</Warning>
+
+## Exemples
+
+### Bannissement simple
+```
+/ban utilisateur:@Membre raison:Spam
+```
+
+### Bannissement avec suppression de messages
+```
+/ban utilisateur:@Membre raison:Raid supprimer_messages:Derniers 7 jours
+```
+
+### Bannissement temporaire
+Utilisez `/tempban` pour un bannissement temporaire :
+```
+/tempban utilisateur:@Membre durée:7j raison:Comportement inapproprié
+```
+
+## Logs
+
+Le bannissement est automatiquement enregistré dans :
+- Le salon de logs (si configuré avec `/setup-logs`)
+- Le système de sanctions (consultable avec `/sanctions`)
+- Les logs Discord natifs
+
+## Notification
+
+Le membre reçoit un message privé avant d'être banni (si ses MPs sont ouverts) contenant :
+- Le nom du serveur
+- La raison du bannissement
+- Le modérateur responsable
+- La possibilité de faire appel (si configuré)
+
+## Commandes associées
+
+<CardGroup cols={2}>
+  <Card title="/unban" icon="unlock" href="/commands/moderation/unban">
+    Débannir un membre
+  </Card>
+  <Card title="/tempban" icon="clock" href="/commands/moderation/tempban">
+    Bannissement temporaire
+  </Card>
+  <Card title="/banlist" icon="list" href="/commands/moderation/banlist">
+    Liste des membres bannis
+  </Card>
+  <Card title="/sanctions" icon="scroll" href="/commands/moderation/sanctions">
+    Historique des sanctions
+  </Card>
+</CardGroup>
+
+## Questions fréquentes
+
+<AccordionGroup>
+  <Accordion title="Pourquoi le ban ne fonctionne pas ?">
+    Vérifiez que :
+    - Le rôle de Chell est au-dessus du membre à bannir
+    - Chell a la permission "Bannir des membres"
+    - Vous ne tentez pas de bannir le propriétaire du serveur
+  </Accordion>
+  
+  <Accordion title="Le membre ne reçoit pas de notification">
+    Le membre a probablement bloqué les messages privés. Le bannissement fonctionne quand même.
+  </Accordion>
+  
+  <Accordion title="Peut-on bannir plusieurs membres à la fois ?">
+    Utilisez `/ban-masse` pour bannir plusieurs membres simultanément.
+  </Accordion>
+</AccordionGroup>
