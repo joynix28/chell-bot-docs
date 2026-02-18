@@ -1,0 +1,117 @@
+---
+title: 'Boutons'
+description: 'Interactions via boutons Discord'
+icon: 'square'
+---
+
+## Qu'est-ce qu'un bouton ?
+
+Les boutons sont des éléments cliquables affichés sous les messages. Chell utilise des boutons pour de nombreuses interactions.
+
+## Types de boutons
+
+### Boutons de validation
+
+Utilisés pour confirmer ou annuler une action :
+
+- ✅ **Valider** : Confirme l'action
+- ❌ **Annuler** : Annule l'action
+
+Exemple : Lors d'un bannissement, Chell demande confirmation via des boutons.
+
+### Boutons de navigation
+
+Pour naviguer dans les menus :
+
+- ◀️ **Précédent**
+- ▶️ **Suivant**
+- 🏠 **Retour au menu**
+
+Exemple : Navigation dans `/help` avec plusieurs pages.
+
+### Boutons d'action
+
+Déclenchent une action spécifique :
+
+- 🎉 **Participer** (giveaways)
+- 👍 **Approuver** / 👎 **Rejeter** (suggestions)
+- 🎫 **Créer un ticket**
+- 🔒 **Fermer le ticket**
+
+## Utilisation dans Chell
+
+### Système de tickets
+
+Les boutons permettent :
+1. Créer un ticket (bouton initial)
+2. Fermer un ticket (modérateur)
+3. Supprimer le ticket (confirmation)
+
+```
+/ticket setup
+```
+
+Crée un panneau avec bouton "Créer un ticket".
+
+### Giveaways
+
+Les participants cliquent sur 🎉 pour participer :
+
+```
+/giveaway start
+```
+
+Le nombre de participants est mis à jour en temps réel.
+
+### Système de suggestions
+
+Chaque suggestion a 3 boutons :
+- 👍 Approuver (staff)
+- 👎 Refuser (staff)  
+- 📊 Voir les votes
+
+### Rôles à boutons
+
+Attribut your roles via boutons :
+
+```
+/roles-menu create
+```
+
+Chaque bouton donne un rôle spécifique.
+
+## Styles de boutons
+
+Chell utilise différents styles selon le contexte :
+
+| Style | Couleur | Usage |
+|-------|---------|-------|
+| Primary | Bleu | Action principale |
+| Secondary | Gris | Action secondaire |
+| Success | Vert | Validation, succès |
+| Danger | Rouge | Suppression, refus |
+| Link | Transparent | Liens externes |
+
+## Limitations
+
+Discord limite à :
+- **5 boutons par ligne**
+- **5 lignes maximum** (25 boutons total)
+- **80 caractères** par label
+
+## Boutons et permissions
+
+Certains boutons vérifient les permissions :
+
+<Warning>
+  Si vous n'avez pas les permissions requises, le bouton affichera une erreur lors du clic.
+</Warning>
+
+Exemple : Les boutons Approuver/Refuser des suggestions sont réservés au staff.
+
+## Expiration
+
+Les boutons de Chell n'expirent généralement pas, sauf :
+- Après action (tickets fermés)
+- Fin d'un giveaway
+- Message de confirmation (30 secondes)

@@ -1,0 +1,108 @@
+---
+title: 'Menu contextuel'
+description: 'Commandes rapides via clic droit'
+icon: 'mouse-pointer'
+---
+
+## Qu'est-ce que le menu contextuel ?
+
+Le menu contextuel permet d'exécuter des actions rapides en faisant un **clic droit** sur un utilisateur ou un message.
+
+## Sur un utilisateur
+
+Faites clic droit sur un membre, puis allez dans **Applications** :
+
+### Modération rapide
+
+- 🔨 **Ban** : Bannir rapidement
+- 👢 **Kick** : Expulser le membre
+- ⚠️ **Warn** : Donner un avertissement
+- 🔇 **Mute** : Rendre muet
+- 🔒 **Jail** : Mettre en prison
+
+### Informations
+
+- 👤 **Infos utilisateur** : Affiche le profil complet
+- 📄 **Sanctions** : Historique des sanctions
+- 📊 **Activité** : Statistiques d'activité
+
+### Actions rapides
+
+- 📩 **Envoyer MP** : Message privé rapide
+- 🎨 **Avatar** : Récupère l'avatar en HD
+- 🎵 **Activité Spotify** : Voir ce qu'il écoute
+
+## Sur un message
+
+Clic droit sur un message, puis **Applications** :
+
+### Modération
+
+- 🗑️ **Supprimer** : Supprime le message
+- 📌 **Épingler** : Épingle dans le salon
+- ⚠️ **Signaler** : Signale au staff
+
+### Utilitaires
+
+- 🌐 **Traduire** : Traduction automatique
+- 📝 **Citation** : Cite le message
+- 📎 **Lien** : Copie le lien du message
+- 🔗 **Archiver** : Sauvegarde le message
+
+### IA
+
+- 🧠 **Analyser** : Analyse avec l'IA
+- 📊 **Sentiment** : Détecte le ton (positif/négatif)
+- ✨ **Améliorer** : Réécriture par IA
+
+## Permissions
+
+Certaines actions vérifient vos permissions :
+
+<Warning>
+  Vous devez avoir les permissions nécessaires pour utiliser les commandes de modération.
+</Warning>
+
+| Action | Permission requise |
+|--------|--------------------|
+| Ban/Kick | Bannir/Expulser des membres |
+| Supprimer msg | Gérer les messages |
+| Épingler | Gérer les messages |
+| Warn | Rôle modérateur |
+
+## Avantages
+
+<CardGroup cols={2}>
+  <Card title="Rapidité" icon="bolt">
+    Actions en 2 clics au lieu de taper une commande
+  </Card>
+  <Card title="Contexte" icon="bullseye">
+    Directement sur la cible, pas besoin de mentionner
+  </Card>
+  <Card title="Intuitif" icon="lightbulb">
+    Interface native Discord
+  </Card>
+  <Card title="Mobile-friendly" icon="mobile">
+    Fonctionne aussi sur mobile
+  </Card>
+</CardGroup>
+
+## Accès mobile
+
+Sur mobile :
+1. Appui long sur un utilisateur/message
+2. Sélectionnez "Apps"
+3. Choisissez l'action Chell
+
+## Configuration
+
+Activez/désactivez certaines actions :
+
+```
+/config context-menu
+```
+
+Options :
+- Limiter aux modérateurs
+- Désactiver certaines commandes
+- Ajouter un log des utilisations

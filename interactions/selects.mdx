@@ -1,0 +1,174 @@
+---
+title: 'Menus déroulants'
+description: 'Sélecteurs Discord pour choisir parmi plusieurs options'
+icon: 'list-dropdown'
+---
+
+## Qu'est-ce qu'un menu déroulant ?
+
+Un sélecteur (select menu) permet de choisir une ou plusieurs options dans une liste déroulante.
+
+## Types de sélecteurs
+
+### Sélecteur de rôles
+
+Les membres choisissent leurs rôles :
+
+```
+/roles-menu create type:Select
+```
+
+Configurez :
+- Jusqu'à 25 rôles
+- Sélection unique ou multiple
+- Rôles obligatoires
+
+### Sélecteur de catégories
+
+Utilisé dans `/help` pour naviguer :
+- Modération
+- Configuration
+- Fun
+- Communauté
+- Info
+- Admin
+- Utilitaires
+
+### Sélecteur de ticket
+
+Choisir le type de ticket :
+
+```
+/ticket setup type:Select
+```
+
+Options :
+- 💬 Support technique
+- ❓ Question générale
+- 🚨 Signalement
+- 🤝 Partenariat
+- 💼 Candidature staff
+
+## Configuration
+
+### Créer un menu de rôles
+
+<Steps>
+  <Step title="Créer le menu">
+    ```
+    /roles-menu create
+    ```
+  </Step>
+  
+  <Step title="Choisir le type">
+    Sélectionnez "Select Menu" (pas boutons)
+  </Step>
+  
+  <Step title="Ajouter des rôles">
+    Sélectionnez jusqu'à 25 rôles
+  </Step>
+  
+  <Step title="Configurer les options">
+    - Label du rôle
+    - Description (optionnelle)
+    - Emoji (optionnel)
+  </Step>
+  
+  <Step title="Définir les limites">
+    - Min : 0 (aucun rôle requis)
+    - Max : 1 (un seul) ou 25 (tous)
+  </Step>
+</Steps>
+
+## Personnalisation
+
+### Options de style
+
+Chaque option peut avoir :
+
+```markdown
+🎮 **Gamer**
+Pour les passionnés de jeux vidéo
+
+🎨 **Artiste**  
+Créatifs et designers
+
+💻 **Développeur**
+Coders et techniciens
+```
+
+### Placeholder
+
+Texte affiché quand aucune option n'est sélectionnée :
+
+```
+Choisissez vos centres d'intérêt...
+```
+
+## Sélection multiple
+
+Permet de sélectionner plusieurs options :
+
+```
+Min: 1 | Max: 5
+```
+
+Le membre doit choisir entre 1 et 5 rôles.
+
+## Exemples d'utilisation
+
+<AccordionGroup>
+  <Accordion title="Rôles de jeux">
+    Menu avec jeux populaires :
+    - 🎮 Valorant
+    - 🎮 League of Legends
+    - 🎮 Minecraft
+    - 🎮 Fortnite
+    - 🎮 GTA V
+    
+    Sélection multiple (0-25)
+  </Accordion>
+  
+  <Accordion title="Rôles de notification">
+    - 📢 Annonces
+    - 🎉 Événements
+    - 📰 News
+    - 🎁 Giveaways
+    - 📢 Updates
+    
+    Sélection multiple (0-5)
+  </Accordion>
+  
+  <Accordion title="Rôles de couleur">
+    - 🔴 Rouge
+    - 🟠 Orange
+    - 🟡 Jaune
+    - 🟢 Vert
+    - 🔵 Bleu
+    - 🟣 Violet
+    - 🟤 Rose
+    
+    Sélection unique (1-1)
+  </Accordion>
+</AccordionGroup>
+
+## Avantages vs Boutons
+
+| Caractéristique | Select Menu | Boutons |
+|-------------------|-------------|----------|
+| Nombre d'options | 25 max | 25 max |
+| Visibilité | Cachées | Toutes visibles |
+| Espace occupé | 1 ligne | 5 lignes max |
+| Sélection multiple | ✅ Oui | ❌ Non |
+| Recherche | ✅ Oui | ❌ Non |
+
+<Tip>
+  Utilisez les select menus pour plus de 5 options, les boutons pour 5 ou moins.
+</Tip>
+
+## Limitations
+
+- **25 options maximum** par menu
+- **100 caractères** par label
+- **100 caractères** par description
+- **5 menus maximum** par message

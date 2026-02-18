@@ -1,0 +1,120 @@
+---
+title: 'Modals (Formulaires)'
+description: 'Formulaires interactifs Discord'
+icon: 'rectangle-list'
+---
+
+## Qu'est-ce qu'un modal ?
+
+Un modal est une fenêtre popup qui s'ouvre pour collecter des informations via un formulaire.
+
+## Utilisation dans Chell
+
+### Création de tickets
+
+Lorsque vous cliquez sur "Créer un ticket", un modal s'ouvre demandant :
+
+- **Sujet** : Le titre de votre demande
+- **Description** : Détails de votre problème
+- **Catégorie** : Type de ticket (optionnel)
+
+### Soumission de suggestions
+
+```
+/suggestion
+```
+
+Ouvre un modal avec :
+- **Titre de la suggestion** (court)
+- **Description détaillée** (jusqu'à 1000 caractères)
+
+### Confessions anonymes
+
+```
+/confession
+```
+
+Modal anonyme pour soumettre :
+- **Votre confession** (anonyme)
+- **Catégorie** (optionnel)
+
+### Formulaires personnalisés
+
+Créez vos propres formulaires :
+
+```
+/config-formulaire create
+```
+
+Configurez :
+- Jusqu'à 5 questions
+- Type de réponse (court/long)
+- Questions obligatoires
+- Salon de réception
+
+## Champs disponibles
+
+### Texte court
+
+- **Limite** : 1 ligne, 100 caractères
+- **Usage** : Titre, nom, mot unique
+
+### Paragraphe
+
+- **Limite** : Plusieurs lignes, 1000 caractères
+- **Usage** : Description, explication détaillée
+
+## Validation
+
+Chell valide automatiquement :
+- Champs obligatoires remplis
+- Longueur minimale respectée
+- Format correct (si spécifié)
+
+<Note>
+  Si la validation échoue, le modal reste ouvert et affiche l'erreur.
+</Note>
+
+## Exemples de formulaires
+
+<AccordionGroup>
+  <Accordion title="Formulaire de candidature staff">
+    1. **Âge** (texte court, obligatoire)
+    2. **Expérience en modération** (paragraphe, obligatoire)
+    3. **Disponibilité hebdomadaire** (texte court)
+    4. **Pourquoi ce serveur ?** (paragraphe)
+    5. **Discord tag** (texte court, obligatoire)
+  </Accordion>
+  
+  <Accordion title="Signalement de bug">
+    1. **Type de bug** (texte court)
+    2. **Description du problème** (paragraphe, obligatoire)
+    3. **Étapes pour reproduire** (paragraphe)
+    4. **Screenshots** (texte court, liens)
+  </Accordion>
+  
+  <Accordion title="Demande de partenariat">
+    1. **Nom du serveur** (texte court, obligatoire)
+    2. **Nombre de membres** (texte court)
+    3. **Description** (paragraphe)
+    4. **Invitation permanente** (texte court, obligatoire)
+    5. **Contrepartie proposée** (paragraphe)
+  </Accordion>
+</AccordionGroup>
+
+## Limitations Discord
+
+- **5 champs maximum** par modal
+- **45 caractères** pour le label
+- **100 caractères** pour texte court
+- **1000 caractères** pour paragraphe
+- **Timeout 15 minutes**
+
+## Conseils
+
+<Tip>
+  - Gardez les questions claires et concises
+  - Utilisez des placeholders pour guider
+  - Marquez uniquement les champs essentiels comme obligatoires
+  - Testez votre formulaire avant de le publier
+</Tip>
