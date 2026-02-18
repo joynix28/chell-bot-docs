@@ -1,0 +1,190 @@
+---
+title: 'Vue d\'ensemble de la configuration'
+description: 'Personnalisez Chell Bot selon vos besoins'
+icon: 'gear'
+---
+
+## Accès à la configuration
+
+La commande principale pour accéder à tous les paramètres :
+
+```
+/config
+```
+
+Cette commande ouvre un menu interactif avec toutes les options de configuration disponibles.
+
+## Modules disponibles
+
+Chell Bot propose **20+ modules configurables** pour adapter le bot à vos besoins.
+
+### 👋 Accueil & Onboarding
+
+<CardGroup cols={2}>
+  <Card title="Accueil" icon="door-open" href="/commands/config/accueil">
+    Messages de bienvenue personnalisés
+  </Card>
+  <Card title="MP on Join" icon="envelope" href="/commands/config/mp-onjoin">
+    Messages privés automatiques
+  </Card>
+  <Card title="Autoroles" icon="user-tag" href="/commands/config/autoroles">
+    Rôles automatiques aux nouveaux
+  </Card>
+  <Card title="Vérification" icon="shield-check" href="/commands/config/verif">
+    Système de vérification captcha
+  </Card>
+</CardGroup>
+
+### 🛡️ Sécurité & Protection
+
+<CardGroup cols={2}>
+  <Card title="Antibot" icon="robot" href="/commands/config/antibot">
+    Protection contre les bots malveillants
+  </Card>
+  <Card title="Antighost Ping" icon="ghost" href="/commands/config/antighostping">
+    Détection des mentions supprimées
+  </Card>
+  <Card title="Antiping" icon="at" href="/commands/config/antiping">
+    Limite les mentions everyone/here
+  </Card>
+  <Card title="Automod" icon="shield-halved" href="/commands/config/automod">
+    Modération automatique
+  </Card>
+</CardGroup>
+
+### 📊 Statistiques & Compteurs
+
+<CardGroup cols={2}>
+  <Card title="Compteur" icon="users" href="/commands/config/compteur">
+    Compteurs de membres en temps réel
+  </Card>
+  <Card title="Count Member" icon="hashtag" href="/commands/config/count-member">
+    Compteur avancé personnalisable
+  </Card>
+</CardGroup>
+
+### 💬 Communauté & Engagement
+
+<CardGroup cols={2}>
+  <Card title="Suggestions" icon="lightbulb" href="/commands/config/suggestions">
+    Système de suggestions avec votes
+  </Card>
+  <Card title="Confessions" icon="mask" href="/commands/config/confessions">
+    Confessions anonymes
+  </Card>
+  <Card title="Avis" icon="star" href="/commands/config/avis">
+    Système de collecte d'avis
+  </Card>
+  <Card title="Ping on Post" icon="bell" href="/commands/config/pingonpost">
+    Notifications automatiques
+  </Card>
+</CardGroup>
+
+### 🏠 Gestion serveur
+
+<CardGroup cols={2}>
+  <Card title="Temp Channel" icon="headphones" href="/commands/config/tempchannel">
+    Salons vocaux temporaires
+  </Card>
+  <Card title="Planning" icon="calendar" href="/commands/config/planning">
+    Système de planning d'événements
+  </Card>
+  <Card title="Règlement" icon="scroll" href="/commands/config/reglement">
+    Générateur de règlement
+  </Card>
+  <Card title="Formulaire" icon="file-lines" href="/commands/config/formulaire">
+    Formulaires personnalisés
+  </Card>
+</CardGroup>
+
+### ⚖️ Modération
+
+<CardGroup cols={2}>
+  <Card title="Warns" icon="triangle-exclamation" href="/commands/config/warns">
+    Configuration des avertissements
+  </Card>
+  <Card title="Prison" icon="handcuffs" href="/commands/config/prison">
+    Système de prison
+  </Card>
+  <Card title="Logs" icon="file-lines" href="/commands/config/logs">
+    Configuration des logs
+  </Card>
+  <Card title="Autokick" icon="door-open" href="/commands/config/autokick">
+    Expulsion automatique
+  </Card>
+</CardGroup>
+
+## Configuration rapide
+
+Pour une configuration optimale, suivez ces étapes :
+
+<Steps>
+  <Step title="Configurez les logs">
+    ```
+    /setup-logs
+    ```
+    Essentiel pour suivre toutes les actions
+  </Step>
+  
+  <Step title="Activez les protections">
+    ```
+    /config-antibot activer:Oui
+    /config-automod activer:Oui
+    ```
+  </Step>
+  
+  <Step title="Personnalisez l'accueil">
+    ```
+    /config-accueil
+    ```
+    Créez un message de bienvenue
+  </Step>
+  
+  <Step title="Configurez les warns">
+    ```
+    /config-warns
+    ```
+    Définissez les sanctions automatiques
+  </Step>
+</Steps>
+
+## Sauvegarde de configuration
+
+Sauvegardez toute votre configuration avec :
+
+```
+/backup create
+```
+
+Et restaurez-la sur un autre serveur avec :
+
+```
+/backup load
+```
+
+## Réinitialisation
+
+Pour réinitialiser un module spécifique :
+
+```
+/config reset module:[nom_du_module]
+```
+
+<Warning>
+  La réinitialisation supprime définitivement la configuration du module. Cette action est irréversible.
+</Warning>
+
+## Permissions
+
+Pour configurer Chell, vous devez avoir :
+- La permission **Gérer le serveur**
+- Ou un rôle autorisé dans `/config permissions`
+
+## Besoin d'aide ?
+
+Chaque module dispose de sa propre documentation détaillée. Consultez les pages correspondantes dans le menu de gauche.
+
+Vous pouvez également utiliser :
+```
+/help config
+```
