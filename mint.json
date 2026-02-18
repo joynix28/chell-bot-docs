@@ -1,0 +1,182 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Chell Bot",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#5865F2",
+    "light": "#7289DA",
+    "dark": "#5865F2",
+    "anchors": {
+      "from": "#5865F2",
+      "to": "#7289DA"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "https://discord.gg/chell"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Inviter Chell",
+    "url": "https://discord.com/oauth2/authorize?client_id=YOUR_CLIENT_ID"
+  },
+  "tabs": [
+    {
+      "name": "Commandes",
+      "url": "commands"
+    },
+    {
+      "name": "Guides",
+      "url": "guides"
+    },
+    {
+      "name": "API",
+      "url": "api"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Discord",
+      "icon": "discord",
+      "url": "https://discord.gg/chell"
+    },
+    {
+      "name": "GitHub",
+      "icon": "github",
+      "url": "https://github.com/joynix28/modele-chell"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Bienvenue",
+      "pages": [
+        "introduction",
+        "quickstart",
+        "features"
+      ]
+    },
+    {
+      "group": "Commandes - Modération",
+      "pages": [
+        "commands/moderation/ban",
+        "commands/moderation/kick",
+        "commands/moderation/jail",
+        "commands/moderation/warn",
+        "commands/moderation/mute",
+        "commands/moderation/clear",
+        "commands/moderation/derank"
+      ]
+    },
+    {
+      "group": "Commandes - Configuration",
+      "pages": [
+        "commands/config/overview",
+        "commands/config/accueil",
+        "commands/config/antibot",
+        "commands/config/antighostping",
+        "commands/config/automod",
+        "commands/config/autoroles",
+        "commands/config/compteur",
+        "commands/config/confessions",
+        "commands/config/logs",
+        "commands/config/mp-onjoin",
+        "commands/config/reglement",
+        "commands/config/suggestions",
+        "commands/config/tempchannel",
+        "commands/config/verif",
+        "commands/config/warns"
+      ]
+    },
+    {
+      "group": "Commandes - Communauté",
+      "pages": [
+        "commands/community/giveaway",
+        "commands/community/planning",
+        "commands/community/sondage",
+        "commands/community/avis",
+        "commands/community/ticket"
+      ]
+    },
+    {
+      "group": "Commandes - Fun",
+      "pages": [
+        "commands/fun/dames",
+        "commands/fun/echecs",
+        "commands/fun/puissance4",
+        "commands/fun/games"
+      ]
+    },
+    {
+      "group": "Commandes - Info",
+      "pages": [
+        "commands/info/help",
+        "commands/info/avatar",
+        "commands/info/server-info",
+        "commands/info/user-info",
+        "commands/info/role-info",
+        "commands/info/botinfo"
+      ]
+    },
+    {
+      "group": "Commandes - Admin",
+      "pages": [
+        "commands/admin/backup",
+        "commands/admin/blacklist",
+        "commands/admin/customise-bot",
+        "commands/admin/roles-masse",
+        "commands/admin/addroles",
+        "commands/admin/removeroles"
+      ]
+    },
+    {
+      "group": "Commandes - Utilitaires",
+      "pages": [
+        "commands/utility/say",
+        "commands/utility/mp",
+        "commands/utility/ghostping",
+        "commands/utility/notes",
+        "commands/utility/radio",
+        "commands/utility/host-image",
+        "commands/utility/shorten-url"
+      ]
+    },
+    {
+      "group": "Interactions",
+      "pages": [
+        "interactions/buttons",
+        "interactions/modals",
+        "interactions/selects",
+        "interactions/context-menu"
+      ]
+    },
+    {
+      "group": "IA & Avancé",
+      "pages": [
+        "advanced/ai-service",
+        "advanced/transcription",
+        "advanced/image-generation"
+      ]
+    },
+    {
+      "group": "Guides",
+      "pages": [
+        "guides/setup",
+        "guides/permissions",
+        "guides/custom-commands",
+        "guides/reaction-roles",
+        "guides/tickets",
+        "guides/verification",
+        "guides/giveaways"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "discord": "https://discord.gg/chell",
+    "github": "https://github.com/joynix28/modele-chell"
+  }
+}
